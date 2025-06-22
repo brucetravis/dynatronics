@@ -1,0 +1,137 @@
+.header-icons {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: 30px
+}
+
+.icon {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Glow efects on hover */
+.icon.search {
+    color: #06d6ff;
+}
+
+.icon.search:hover {
+    filter: drop-shadow(0 0 4px #06d6ff) 
+            drop-shadow(0 0 8px #06d6ff) 
+            drop-shadow(0 0 12px #06d6ff);
+}
+
+.icon.user {
+    color: #7720e9;
+}
+
+
+.icon.user:hover {
+    filter: drop-shadow(0 0 4px#7720e9)
+            drop-shadow(0 0 8px #7720e9)
+            drop-shadow(0 0 12px #c8b9dd);
+}
+
+
+.icon.heart {
+    color: #FF4D6D;
+}
+
+
+.icon.heart:hover {
+    filter: drop-shadow(0 0 4px #FF4D6D) 
+            drop-shadow(0 0 8px #FF4D6D) 
+            drop-shadow(0 0 12px #FF4D6D);
+}
+
+
+.icon.cart {
+    color: #FFD700;
+}
+
+.icon.cart:hover {
+    filter: drop-shadow(0 0 4px #FFD700) 
+            drop-shadow(0 0 8px #FFD700) 
+            drop-shadow(0 0 12px #FFD700);
+}
+
+
+.custom-tooltip {
+    padding: 8px 12px;
+    border-radius: 12px !important;
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-align: center;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+
+/* Individual tooptip themes */
+.custom-tooltip.search-tooltip {
+    background-color: #06d6ff;
+    box-shadow: 0 0 10px #06d6ff;
+}
+
+.custom-tooltip.user-tooltip {
+  background-color: #A259FF;
+  box-shadow: 0 0 10px #A259FF;
+}
+
+.custom-tooltip.heart-tooltip {
+  background-color: #FF4D6D;
+  box-shadow: 0 0 10px #FF4D6D;
+}
+
+.custom-tooltip.cart-tooltip {
+  background-color: #FFD700;
+  box-shadow: 0 0 10px #FFD700;
+}
+
+@media screen and (max-width: 746px) {
+  .header-icons {
+    /* background-color: red; */
+    width: 100vw;
+    gap: 110px
+  }
+
+  .icon.search {
+      color: #0DCAF0;
+  }
+
+  .icon.search:hover {
+      filter: drop-shadow(0 0 4px #0DCAF0) 
+              drop-shadow(0 0 8px #0DCAF0) 
+              drop-shadow(0 0 12px #0DCAF0);
+  }
+
+  .icon.user {
+      color: #A259FF;
+  }
+
+
+  .icon.user:hover {
+      filter: drop-shadow(0 0 4px#A259FF)
+              drop-shadow(0 0 8px #A259FF)
+              drop-shadow(0 0 12px #A259FF);
+  }
+
+  
+}
+
+
+
+
+/* .icon.heart:hover {
+  color: #FF4D6D;
+  animation: pulse-glow 1.2s infinite ease-in-out;
+} */
+
+/* @keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px #FF4D6D) drop-shadow(0 0 8px #FF4D6D) drop-shadow(0 0 12px #FF4D6D);
+  }
+  50% {
+    filter: drop-shadow(0 0 2px #FF4D6D) drop-shadow(0 0 6px #FF4D6D) drop-shadow(0 0 10px #FF4D6D);
+  }
+} */

@@ -1,0 +1,95 @@
+.social-media-icons {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.social-icon.facebook {
+    color: #1877F2;
+    box-shadow: 0 0 10px #1877F2;
+}
+
+.social-icon.facebook:hover {
+    filter: drop-shadow(0 0 4px #1877F2)
+            drop-shadow(0 0 8px #1877F2);
+}
+
+
+.social-icon.whatsapp {
+    color: #25D366;
+    box-shadow: 0 0 10px #25D366;
+}
+
+.social-icon.whatsapp:hover {
+    filter: drop-shadow(0 0 4px #25D366)
+            drop-shadow(0 0 8px #25D366);
+}
+
+.social-icon.instagram {
+    color: #E4405F;
+    box-shadow: 0 0 10px#E4405F;
+}
+
+
+.social-icon.instagram:hover {
+    filter: drop-shadow(0 0 4px #E4405F)
+            drop-shadow(0 0 8px #E4405F);
+}
+
+.social-icon.x {
+    color: #1DA1F2;
+    box-shadow: 0 0 10px #1DA1F2
+}
+
+.social-icon.x:hover {
+    filter: drop-shadow(0 0 4px #1DA1F2)
+            drop-shadow(0 0 8px #1DA1F2);
+}
+
+
+.custom-social-tooltip {
+    padding: 8px 12px;
+    border-radius: 12px !important;
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: white;
+    transition: all0.3s ease;
+}
+
+.custom-social-tooltip.facebook-tooltip {
+    background-color: #1877F2;
+    box-shadow: 0 0 10px #1877F2;
+}
+
+.custom-social-tooltip.whatsapp-tooltip {
+    background-color: #25D366;
+    box-shadow: 0 0 10px #25D366;
+}
+
+.custom-social-tooltip.instagram-tooltip {
+    background-color: #E4405F;
+    box-shadow: 0 0 10px #E4405F;
+}
+
+.custom-social-tooltip.x-tooltip {
+    background-color: #1DA1F2;
+    box-shadow: 0 0 10px #1DA1F2;
+}
+
+@media screen and (max-width: 746px) {
+    .social-media-icons {
+        gap: 110px
+    }
+    .social-icon.x {
+        color: #6dc4fa;
+        box-shadow: 0 0 10px #6dc4fa
+    }
+
+    .social-icon.x:hover {
+        filter: drop-shadow(0 0 4px #52a6da)
+                drop-shadow(0 0 8px #52a6da);
+    }
+}

@@ -1,0 +1,57 @@
+.header-section {
+    background: linear-gradient(135deg, #0A0F3C 0%, #0DCAF0 100%);
+    padding: 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 9999;
+    /* color: white; */
+}
+
+.header-section .logo a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0DCAF0;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    filter: drop-shadow(0 0 2px #13a6c4); /* Minimal glow */
+    transition: all 0.3s ease;
+}
+
+.header-section .logo a span {
+    color: #A259FF;
+    filter: drop-shadow(0 0 1.5px #8b4cdd); /* Very soft glow */
+}
+
+.header-section .logo a:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 3px #13a6c4)
+            drop-shadow(0 0 6px #13a6c4);
+}
+.header-section .logo a span:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 3px #8b4cdd);
+}
+
+
+@media screen and (max-width: 746px) {
+    .header-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 45px;
+        padding-top: 2vh;
+    }
+
+    .social-icons,
+    .logo,
+    .header-icons {
+        text-align: center;
+    }
+}
+
