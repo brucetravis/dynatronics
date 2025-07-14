@@ -1,0 +1,197 @@
+/* ==== layout wrapper ==== */
+.category-section {
+  position: relative;      /* so the buttons can be absolutely positioned */
+  padding: 10px ;
+}
+
+/* ==== scrolling row ==== */
+.cards-track {
+  display: flex;
+  /* gap: 8px; */
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  border-bottom: 0.1px solid #0dcaf0;
+}
+.cards-track::-webkit-scrollbar { display: none; }  /* Chrome */
+
+/* ==== each card ==== */
+.category-card {
+  flex: 0 0 auto;
+  width: 300px;
+  /* width: calc((100% - 4rem) / 5); */
+  height: 150px;
+  border-radius: 12px;
+  background:#1A1D29;
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:600;
+  box-shadow:0 0 6px rgba(0,0,0,.35);
+  user-select:none;
+  transition:transform .25s;
+}
+.category-card:hover { transform:scale(1.05); }
+
+/* ==== arrow buttons ==== */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px; height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,.65);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition: background .2s;
+  z-index: 1;
+}
+
+.scroll-btn:hover { background: rgba(0,0,0,.85); }
+.scroll-btn.left  { left: 10px; }
+.scroll-btn.right { right: 10px; }
+
+
+
+.category-cards-container {
+    width: 100%;
+    display: flex;
+    /* flex-wrap: nowrap; */
+    border-bottom: 1px solid #0dcaf0;
+}
+
+/* All category cards */
+.category-card {
+    width: 300px;
+    height: 150px;
+    border-radius: 12px;
+    background-color: #1A1D29;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    flex: 0 0 auto;
+    margin: 12px;
+    text-shadow: 0 0 6px rgba(0,0,0,0.4);
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+
+.category-card.electric h3 {
+    /* text-shadow: 0 0 6px rgba(255, 255, 255, 0.6); */
+    text-shadow: 0 0 6px rgba(44, 27, 27, 0.6);
+}
+
+
+.category-card.electric::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    background: linear-gradient(45deg, red, blue, purple, cyan, magenta, red);
+    background-size: 600% 600%;
+    animation: electricGlow 6s linear infinite;
+    filter: blur(8px);
+    border-radius: 14px;
+}
+
+
+@keyframes electricGlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.category-card:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    transition: transform 0.3s ease;
+}
+
+
+@keyframes electricFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.category-card.blue-electric {
+   background: linear-gradient(135deg, #0A0F3C, #0dcaf0);
+   background-size: 200% 200%;
+   animation: electricFlow 6s linear infinite;
+}
+
+.category-card.red-electric {
+    background: linear-gradient(135deg, #6B0000, #FF3C3C);
+    background-size: 200% 200%;
+    animation: electricFlow 6s ease infinite
+}
+
+
+.category-card.purple-electric {
+    background: linear-gradient(135deg, #320064, #A259FF);
+    background-size: 200% 200%;
+    animation: electricFlow 6s ease infinite;
+}
+
+
+.category-card.green-electric {
+    background: linear-gradient(135deg, #014421, #00FFAB);
+    background-size: 200 200%;
+    animation: electricFlow 6s ease infinite;
+}
+
+
+.category-card.neon-orange-electric {
+    background: linear-gradient(135deg, #471000, #FF8C00);
+    background-size: 200% 200%;
+    animation: electricFlow 6 ease infinite;
+}
+
+.category-card.cyan-electric {
+    background: linear-gradient(135deg, #003344, #00FFFF);
+    background-size: 200% 200%;
+    animation: electricFlow 6s ease infinite;
+}
+
+.category-card.pink-electric {
+    background: linear-gradient(135deg, #3B0A2B, #FF69B4);
+    background-size: 200% 200%;
+    animation: electricFlow 6s ease infinite;
+}
+
+.category-card.yellow-electric {
+    background: linear-gradient(135deg, #4D4400, #FFD700);
+    background-size: 200% 200%;
+    animation: electricFlow 6s ease infinite;
+}
+
+.orange-electric {
+    background: linear-gradient(135deg, #a74505, #FFB347); 
+    background-size: 200% 200%; 
+    animation: electricFlow 6s ease infinite;
+}
+

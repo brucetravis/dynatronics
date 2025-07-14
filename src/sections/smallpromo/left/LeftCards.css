@@ -1,0 +1,29 @@
+.small-left-card-one {
+    background-image: url(../../../images/gaming/gaming-pad-2.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+}
+
+.small-left-card-two {
+    background-image: url(../../../images/vr-glasses/vr-glasses-10.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+}
+
+.small-left-card-three {
+    background-image: url(../../../images/vr-glasses/vr-glasses-6.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+}
+
+.small-left-card-four {
+    background-image: url(../../../images/airpods-2.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 328px;
+}
+
+

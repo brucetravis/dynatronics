@@ -1,0 +1,33 @@
+.big-card-one {
+    background-image: url(../../images/gaming/console-10.jpg);
+    background-position: center;
+    background-size: cover;
+    /* max-width: 720px; */
+    /* margin: 0 auto; */
+    height: 550px;
+}
+
+
+.big-card-two {
+    background-image: url(../../images/headphones/headphones-7.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+}
+
+
+.big-card-three {
+    background-image: url(../../images/headphones/headphones.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+}
+
+
+.big-card-four {
+    background-image: url(../../images/audio-entertainment/samsung-unveils.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 600px;
+}
+

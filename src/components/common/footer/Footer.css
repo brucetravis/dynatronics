@@ -1,0 +1,138 @@
+.footer-section {
+    /* background: linear-gradient(135deg, #0A0F3C, #0DCAF0); */
+    background: linear-gradient(188deg, #0A0F3C, #0DCAF0);
+    color: white;
+    /* padding: 50px 20px 20px; */
+    padding: 30px 30px 50px;
+    margin-top: 10vh;
+    position: relative;
+    z-index: 100;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    width: 100%;
+}
+
+.footer-logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #0DCAF0;
+    text-decoration: none;
+    filter: drop-shadow(0 0 2px #13a6c4);
+}
+
+
+.footer-logo a span {
+    color: #A259FF;
+    filter: drop-shadow(0 0 2px #8b4cdd);
+}
+
+
+.footer-logo p {
+    margin-top: 10px;
+    font-style: italic;
+    color: #ccc;
+}
+
+
+.footer-links h4,
+.footer-socials h4 {
+    margin-bottom: 10px;
+    color: #00FFAB;
+}
+
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+.footer-links li {
+    margin: 5px 0;
+}
+
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+
+.footer-socials .footer-social-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-socials .footer-social-icons a {
+    margin-right: 15px;
+    color: white;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+
+.footer-socials .footer-social-icons .social-icons a:hover {
+    transform: scale(1.2);
+    color: #FF70A6
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    /* color: #ccc; */
+    color: #00ff95;
+    border-top: 1px solid #0DCAF0;
+    padding: 10px;
+}
+
+
+
+@media screen and (max-width: 992px) {
+    .footer-container {
+        flex-direction: column;
+    }
+}
+
+
+.footer-map {
+    height: 250px;
+    min-width: 500px;
+    margin-top: 20px;
+    box-shadow: 0 0 15px #0DCAF0;
+    border: 2px solid #0DCAF0;
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+
+
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
+  z-index: 0;
+}
+
+
+@media screen and (max-width: 992px) {
+    .footer-container {
+        align-items: flex-start;
+    }
+}
+
+

@@ -1,0 +1,44 @@
+.header-right {
+    position: fixed;
+    top: 145px;
+    right: 5px;
+    padding: 10px;
+    /* background-color: red; */
+    /* background: rgba(10, 15, 60, 0.6); /* semi-transparent electric panel 
+    border-radius: 12px;
+    box-shadow: 0 0 12px #0DCAF0; 
+    backdrop-filter: blur(6px); */
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+
+.greeting {
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #0DCAF0;
+    text-shadow: 0 0 12px #0DCAF0;
+    transition: text-shadow .3s ease, 
+                transform .3s ease;
+}
+
+
+.header-right:hover .greeting {
+    text-shadow: 0 0 8px #0DCAF0,
+                 0 0 14px #0DCAF0,
+                 0 0 28px #0DCAF0;
+}
+
+
+.chevron {
+    stroke: #0DCAF0;
+    transition: transform .3s ease;
+}
+
+.header-right:hover .chevron {
+    transform: rotate(180deg);
+}
+

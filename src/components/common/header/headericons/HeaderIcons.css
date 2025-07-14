@@ -27,10 +27,21 @@
 
 
 .icon.user:hover {
-    filter: drop-shadow(0 0 4px#7720e9)
-            drop-shadow(0 0 8px #7720e9)
-            drop-shadow(0 0 12px #c8b9dd);
+  filter: drop-shadow(0 0 4px#7720e9)
 }
+
+
+.icon.logout {
+    color: #ff0055;
+}
+
+
+.icon.logout:hover {
+  filter: drop-shadow(0 0 4px#ff0055)
+          drop-shadow(0 0 8px #ff0055)
+          drop-shadow(0 0 12px #ff0055);
+}
+
 
 
 .icon.heart {
@@ -46,14 +57,27 @@
 
 
 .icon.cart {
-    color: #FFD700;
+    /* color: #FFD700; */
+    color: #c8ff00d0;
 }
 
 .icon.cart:hover {
-    filter: drop-shadow(0 0 4px #FFD700) 
-            drop-shadow(0 0 8px #FFD700) 
-            drop-shadow(0 0 12px #FFD700);
+  filter: drop-shadow(0 0 4px #c8ff00d0) 
+          drop-shadow(0 0 8px #c8ff00d0) 
+          drop-shadow(0 0 12px #c8ff00d0);
 }
+
+
+.icon.about {
+    color: 	#00ffb3;
+}
+
+.icon.about:hover {
+    filter: drop-shadow(0 0 4px 	#00ffb3) 
+            drop-shadow(0 0 8px 	#00ffb3) 
+            drop-shadow(0 0 12px 	#20C997);
+}
+
 
 
 .custom-tooltip {
@@ -78,21 +102,34 @@
   box-shadow: 0 0 10px #A259FF;
 }
 
+
+.custom-tooltip.logout-tooltip {
+  background-color: #ff0055;
+  box-shadow: 0 0 10px #ff0055;
+}
+
+
 .custom-tooltip.heart-tooltip {
   background-color: #FF4D6D;
   box-shadow: 0 0 10px #FF4D6D;
 }
 
 .custom-tooltip.cart-tooltip {
-  background-color: #FFD700;
-  box-shadow: 0 0 10px #FFD700;
+  background-color: #c8ff00d0;
+  box-shadow: 0 0 10px #c8ff00d0;
+}
+
+
+.custom-tooltip.about-tooltip {
+  background-color: 	#20C997;
+  box-shadow: 0 0 10px 	#20C997;
 }
 
 @media screen and (max-width: 746px) {
   .header-icons {
     /* background-color: red; */
     width: 100vw;
-    gap: 110px
+    gap: 90px
   }
 
   .icon.search {

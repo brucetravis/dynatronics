@@ -1,0 +1,74 @@
+.cookie-card {
+    position: fixed;
+    bottom: 24px;
+    /* right: 24px; */
+    left: 24px;
+    max-width: 320px;
+    background: #1A1D29;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 0 18px #0DCAF0;
+    color: #F1F5FA;
+    z-index: 600;
+    animation: slideIn 0.6s ease forwards;
+}
+
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(40px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+.cookie-link {
+    color: #0DCAF0;
+    text-decoration: underline;
+}
+
+
+.btn-row {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px
+}
+
+.cookie-btn {
+    flex: 1;
+    padding: 8px 0;
+    border-radius: 8px;
+    font-weight: 600px;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.3s;
+}
+
+.cookie-btn.accept {
+    background: #0DCAF0;
+    color: #0B132B;
+    box-shadow: 0 0 10px #0DCAF0;
+}
+
+.cookie-btn.accept:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #0AA7C0;
+}
+
+
+.cookie-btn.decline {
+    background-color: transparent;
+    color: #FF4D4D;
+    border: 2px solid #FF4D4D;
+    box-shadow: 0 0 10px #FF4D4D;
+}
+
+.cookie-btn.decline:hover {
+    background-color: #FF4D4D;
+    COLOR:#1A1D29;
+}
+

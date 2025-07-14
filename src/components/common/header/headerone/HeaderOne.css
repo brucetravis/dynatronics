@@ -1,0 +1,40 @@
+.promo-container {
+    background-color: #1e83a5;
+    height: 60px;
+    /* position: relative; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    display: flex;
+    padding-top: 5px;
+    z-index: 500;
+    /* align-items: center; */
+    /* width: max-content; */
+}
+
+.promo-marquee {
+    display: flex;
+    /* display: inline-block; */
+    white-space: nowrap;
+    animation: scroll-left 15s linear infinite;
+    animation-play-state: paused;
+    width: max-content
+}
+
+.promo-container:hover .promo-marquee {
+    animation-play-state: running;
+    cursor: pointer;
+}
+
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0%)
+    }
+
+    100% {
+        transform: translateX(-100%)
+    }
+}

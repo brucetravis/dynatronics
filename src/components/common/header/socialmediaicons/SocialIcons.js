@@ -1,12 +1,19 @@
 import React from 'react'
 import './SocialIcons.css'
 import {  Facebook, Instagram } from 'lucide-react'
-import { FaWhatsapp, FaXTwitter } from 'react-icons/fa6'
+import { FaWhatsapp, FaXTwitter, FaDiscord } from 'react-icons/fa6'
 import { Tooltip } from 'react-tooltip'
 
 export default function SocialIcons() {
   return (
     <div className='social-media-icons '>
+        <FaDiscord
+            size={35}
+            className="social-icon discord"
+            data-tooltip-id="discordTip"
+            onClick={() => window.open('https://discord.gg/yourInviteCode', '_blank')}
+        />
+
         <Facebook 
             size={28} 
             className='social-icon facebook'
@@ -14,6 +21,7 @@ export default function SocialIcons() {
             onClick={() => window.open('https://facebook.com/dynatronics', '_blank')}
 
         />
+        
 
         <FaWhatsapp 
             size={28} 
@@ -36,7 +44,8 @@ export default function SocialIcons() {
             data-tooltip-id="xTip" 
             onClick={() => window.open("https://x.com/dynatronics", '_blank')}
         />
-        
+
+        <Tooltip id="discordTip" effect="solid" place="bottom" className="custom-tooltip discord-tooltip">Discord</Tooltip>
         <Tooltip id='facebookTip' effect="solid" place='bottom' className='custom-social-tooltip facebook-tooltip' >Facebook</Tooltip>
         <Tooltip id='whatsappTip' effect="solid" place='bottom' className='custom-social-tooltip whatsapp-tooltip' >WhatsApp</Tooltip>
         <Tooltip id='instagramTip' effect='solid' place='bottom' className='custom-social-tooltip instagram-tooltip' >Instagram</Tooltip>

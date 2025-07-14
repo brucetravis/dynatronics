@@ -1,0 +1,114 @@
+/* -------------- 1. Layout -------------- */
+.electric-form {
+    /* width: 320px; */
+    width: 500px;
+    /* padding: 20px;
+    width: 100%; */
+    margin: 60px auto;
+    padding: 32px 30px;
+    /* background: #1A1D29; */
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    color: #F1F5FA;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.electric-form h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 700;
+    color: #0DCAF0;
+}
+
+
+/* -------------- 2. Fields -------------- */
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+    position: relative;
+}
+
+
+.field input {
+    /* background: #2C3446; */
+    /* background: #2C3446; */
+    background: transparent;
+    /* border: 2px solid transparent; */
+    border: 2px solid #00FFAB;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    color: #F1F5FA;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.field input::placeholder {
+    /* color: #7D8696; */
+    color: #00FFAB;
+}
+
+/* -------------- 3. Electric Focus Glow -------------- */
+.field input:focus {
+    border-color: #0DCAF0;
+    /* border-radius: 2px solid #0DCAF0; */
+    box-shadow: 0 0 100px #0DCAF0;
+}
+
+/*--------------- 4. Password field Eye --------------- */
+.password-field {
+    position: relative;
+}
+
+.eye-btn {
+    position: absolute;
+    right: 10px;
+    top: 35px;
+    border: none;
+    background: none;
+    color: #0DCAF0;   /* sets stroke color */
+}
+
+.eye-btn svg {
+    transition: filter .3s ease;
+}
+
+.eye-btn:hover svg{
+    filter: drop-shadow(0 0 8px #0DCAF0),
+            drop-shadow(0 0 14px #0DCAF0),
+            drop-shadow(0 0 28px #0DCAF0);
+}
+
+
+/* -------------- 5. Submit Button -------------- */
+.submit-btn {
+    width: 100%;
+    background: #0DCAF0;
+    color: #0B132B;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 0;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 12px #0DCAF0;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 30px #0AA7C0;
+}
+
+.submit-btn:active { transform: scale(0.98); }
+
+
+.electric-form a {
+    color: #00FFAB;
+}

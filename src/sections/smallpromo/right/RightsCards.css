@@ -1,0 +1,30 @@
+.small-right-card-one {
+    background-image: url(../../../images/gaming/gaming-pad-5.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+}
+
+.small-right-card-two {
+    background-image: url(../../../images/laptops/acer-nitro-5.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+}
+
+
+.small-right-card-three {
+    background-image: url(../../../images/vr-glasses/vr-glasses-7.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 400px;
+}
+
+.small-right-card-four {
+    background-image: url(../../../images/laptops/macbook-air.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 328px;
+}
+
+

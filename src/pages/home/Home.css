@@ -1,0 +1,48 @@
+.home-page {
+  padding-top: 18vh;
+}
+
+
+.promo-card {
+  padding: 20px;
+  border-radius: 12px;
+  height: 100%;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.promo-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+
+/* .promo-card img {
+    width: 100%;
+    object-fit: cover;
+} */
+
+.shop-link {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.shop-link:hover {
+  color: #ccc;
+}
+
+
+/* .small-card img {
+  max-height: 150px;
+  object-fit: contain;
+} */
+
+
+
+.small-card:hover,
+.big-card:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,96 @@
+.products-upload-page {
+  padding-top: 13vh;
+}
+
+
+/* -------------- 1. Layout -------------- */
+.electric-upload-form {
+    /* width: 320px; */
+    width: 500px;
+    /* padding: 20px;
+    width: 100%; */
+    margin: 60px auto;
+    padding: 32px 28px;
+    background: #1A1D29;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    color: #F1F5FA;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.electric-upload-form h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    font-weight: 700;
+    color: #0DCAF0;
+}
+
+
+.electric-upload-form .categ-name {
+    gap: 20px
+}
+
+.electric-glow-wrapper {
+  position: relative;
+  border-radius: 12px;
+  padding: 2px; /* creates spacing between glow and textarea */
+  z-index: 0;
+}
+
+
+.electric-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: white;
+  background-color: #1A1D29;
+  border: none;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  outline: none;
+  resize: vertical;
+}
+
+/* Glowing animated border using ::before */
+.electric-glow-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 12px;
+  background: linear-gradient(45deg, red, blue, cyan, magenta, purple);
+  background-size: 600% 600%;
+  animation: electricGlow 6s linear infinite;
+  filter: blur(8px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Required animation */
+@keyframes electricGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.electric-file-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+
+
+.file-input:hover {
+  cursor: pointer;
+}
