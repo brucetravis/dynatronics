@@ -191,7 +191,7 @@ export default function Form() {
             <div>
                 {!isLogIn && (
                     <label className='field'>
-                        <span>Name</span>
+                        <span>Name:</span>
                         <input 
                             type='text' 
                             name="name" 
@@ -203,7 +203,7 @@ export default function Form() {
                     </label>
                 )}
                 <label className='field'>
-                    <span>Email</span>
+                    <span>Email:</span>
                     <input 
                         type='email' 
                         name="email" 
@@ -214,7 +214,7 @@ export default function Form() {
                     />
                 </label>
                 <label className='field password-field'>
-                    <span>Password (6 or more characters)</span>
+                    <span>Password (6 or more characters):</span>
                     <input 
                         type={ showPwd ? 'text' : 'password' } 
                         name='password' 
@@ -235,7 +235,7 @@ export default function Form() {
                 </label>
                 {!isLogIn && (
                     <label className='field'>
-                        <span>Confirm Password</span>
+                        <span>Confirm Password:</span>
                         <input 
                             type={showConfirmPwd ? "text": "password" }
                             name="ConfirmPassword" 

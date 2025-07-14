@@ -1,3 +1,5 @@
+PAY N' PLAY
+
 const names = [ "john Stewart", "john Doe", "maggie harlem"]
 const convertedNames = names.map((name) => name.split("").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(""))
 console.log(convertedNames)

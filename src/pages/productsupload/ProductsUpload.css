@@ -27,7 +27,19 @@
 
 
 .electric-upload-form .categ-name {
-    gap: 20px
+  gap: 20px
+}
+
+.electric-upload-form .categ-name .field span {
+  color: #00ffff;
+}
+
+.electric-upload-form .categ-name input {
+  color: #00FFAD
+}
+
+.electric-upload-form textarea {
+  color: #00FFAD
 }
 
 .electric-glow-wrapper {

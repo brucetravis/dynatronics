@@ -2,6 +2,7 @@ import React from 'react'
 import './LeftCards.css'
 import { Link } from 'react-router-dom'
 import promoData from '../../../components/data/PromoData'
+import samsungVideo from '../../../videos/samsung-1.mp4'
 
 export default function LeftCards() {
   return (
@@ -12,9 +13,16 @@ export default function LeftCards() {
         </div>
 
         <div className="promo-card small-left-card-two text-white mt-4" >
+            <video controls autoPlay loop >
+                <source src={samsungVideo} type='video/mp4' />
+                Your browser does not suppoert the video tag
+            </video>
+        </div>
+
+        {/* <div className="promo-card small-left-card-two text-white mt-4" >
             <h5>{promoData[4].text}</h5>
             <Link to={promoData[4].link} className="shop-link">Shop Deals</Link>
-        </div>
+        </div> */}
 
         <div className="promo-card small-left-card-three text-white mt-4" >
             <h5>{promoData[4].text}</h5>

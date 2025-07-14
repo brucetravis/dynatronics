@@ -1,8 +1,10 @@
 .small-right-card-one {
-    background-image: url(../../../images/gaming/gaming-pad-5.jpg);
+    /* background-image: url(../../../images/gaming/gaming-pad-5.jpg); */
     background-position: center;
     background-size: cover;
     height: 400px;
+    /* height: 100%;
+    width: 100% */
 }
 
 .small-right-card-two {
@@ -24,7 +26,7 @@
     background-image: url(../../../images/laptops/macbook-air.jpg);
     background-position: center;
     background-size: cover;
-    height: 328px;
+    height: 300px;
 }
 
 

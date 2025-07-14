@@ -31,6 +31,10 @@
     position: relative;
 }
 
+.field label span {
+    color: #00ffff;
+}
+
 
 .field input {
     /* background: #2C3446; */

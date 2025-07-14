@@ -38,7 +38,7 @@ export default function CookieBanner() {
   // When the accept button is clicked,
   const accept = () => {
     // save the cookie
-    setCookie("dynatronics_conset", "accepted"); 
+    setCookie("dynatronics_consent", "accepted"); 
     // then hide the cookie banner
     setShow(false)
   }

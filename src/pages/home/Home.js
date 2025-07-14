@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import './Home.css'
-import promoData from '../../components/data/PromoData'
-import { Link } from 'react-router-dom'
 import LeftCards from '../../sections/smallpromo/left/LeftCards'
 import BigPromo from '../../sections/bigpromo/BigPromo'
 import RightCards from '../../sections/smallpromo/right/RightCards'
+import MediumPromo from '../../sections/mediumpromo/MediumPromo'
+import BigVideo from '../../sections/bigpromo/bigvideo/BigVideo'
 
 export default function Home() {
 
@@ -23,6 +23,12 @@ export default function Home() {
 
           <RightCards />
 
+        </div>
+        
+        <div className='row g-4 align-items-center mt-4'>
+          <MediumPromo />
+          
+          <BigVideo />
         </div>
       </div>
 

@@ -3,14 +3,19 @@ import './ProductDetails.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../components/configs/firebase/firebase'
+import { useAuth } from '../../contexts/AuthProvider'
 
 export default function ProductDetails() {
+
+    // Get the function to add products to the Cart
+    const { fetchCartProduct } = useAuth()
 
     // React hook to navigate to other pages
     const navigate = useNavigate()
 
     // extract the Id of a specific product
     const { id } = useParams()
+    
 
     // states to update the product info according to It's specific details
     const [ productInfo, setProductInfo ] = useState(null) // Initial state should be nothing since Initially, there wil be no product info in the age
@@ -29,7 +34,7 @@ export default function ProductDetails() {
                 
                 // check if the document exists
                 if (productSnapShot.exists()) {
-                    // If It does, update the state with all the product information accordin to the specific If
+                    // If It does, update the state with all the product information according to the specific Id
                     setProductInfo({
                         // Get the product id since It is stored separately from the other product data
                         id: productSnapShot.id,
@@ -94,7 +99,10 @@ export default function ProductDetails() {
                     </p>
 
                     <div className='mb-4'>
-                        <button className='add-to-cart-button-details mt-3'>
+                        <button
+                            onClick={() => fetchCartProduct(productInfo.id)}
+                            className='add-to-cart-button-details mt-3'
+                        >
                             Add to cart
                         </button>
                     </div>

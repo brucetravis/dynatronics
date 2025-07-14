@@ -4,6 +4,7 @@ import CategoryCards from '../../components/cards/categorycards/CategoryCards'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../components/configs/firebase/firebase'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthProvider'
 
 
 export default function Shop() {
@@ -11,7 +12,11 @@ export default function Shop() {
   // React state to render all the products
   const [ showProducts, sethowProducts ] = useState([]) // Initially It is an empty array
 
-  // fucntion to fetch products from firestore
+
+  // Get the cart function for the Auth in order to update the function
+  const { fetchCartProduct } = useAuth()
+
+  // function to fetch products from firestore
   const fetchProducts = async () => {
     
     try {
@@ -57,6 +62,8 @@ export default function Shop() {
     window.scrollTo(0, 0)
   }, [])
 
+ 
+
   return (
     <div className='shop-page '>
       <div className=''>
@@ -68,12 +75,12 @@ export default function Shop() {
           <div
             key={product.id}
             className='product-card'
-            onClick={()=> handleClick(product.id)}
           >
             <img 
               src={product.imageUrl}
               alt="Product pic"
               className='product-image'
+              onClick={()=> handleClick(product.id)}
             />
 
             <div className='product-info'>
@@ -86,7 +93,10 @@ export default function Shop() {
               </p>
             </div>
 
-            <button className='add-to-cart-button'>
+            <button 
+              className='add-to-cart-button'
+              onClick={() => fetchCartProduct(product.id)} // call the function when clicked
+            >
               Add to cart 
             </button>
           </div>
