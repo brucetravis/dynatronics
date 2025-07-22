@@ -8,6 +8,9 @@ import { auth } from '../../../configs/firebase/firebase'
 import { useAuth } from '../../../../contexts/AuthProvider'
 import LogOutModal from '../../../modals/logout/LogOutModal'
 import { toast } from 'react-toastify'
+import { useShop } from '../../../../contexts/ShopProvider'
+import { useWish } from '../../../../contexts/WishListProvider'
+import { useSearch } from '../../../../contexts/SearchProvider'
 
 export default function HeaderIcons() {
 
@@ -39,9 +42,14 @@ export default function HeaderIcons() {
     navigate('/home', { replace: true })
   }
 
-  // Get the cart function from Auth state in order to display the shopping Cart
-  const { setShowCart, setShowWish, setShowSearch } = useAuth()
+  // Get the cart state function from the ShopProvider in order to display the shopping Cart
+  const { setShowCart } = useShop()
 
+  // Get the WishList state function from the WishList Provider in order to display the WishList bar
+  const { setShowWish } = useWish()
+
+  // Get the Search State function from the Search context in order to display the search bar
+  const { setShowSearch } = useSearch()
   
   return (
     <>

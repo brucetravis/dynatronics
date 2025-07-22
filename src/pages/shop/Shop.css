@@ -79,5 +79,13 @@
     cursor: pointer;
 }
 
-
+.shop-loading {
+    height: 50vh;
+    color: #00FFAB;
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
 

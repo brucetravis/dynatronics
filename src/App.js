@@ -11,16 +11,24 @@ import CookieBanner from './components/cookies/CookieBanner';
 import ProductsUpload from './pages/productsupload/ProductsUpload';
 import ProductDetails from './pages/productdetails/ProductDetails';
 import ShoppingCart from './components/shoppingcart/ShoppingCart';
-import { useAuth } from './contexts/AuthProvider';
 import { AnimatePresence } from 'framer-motion';
 import WishList from './components/wishlist/WishList';
 import SearchBar from './components/searchbar/SearchBar';
+import { useShop } from './contexts/ShopProvider';
+import { useWish } from './contexts/WishListProvider';
+import { useSearch } from './contexts/SearchProvider';
 
 function App() {
 
-  // Get the shopping cart state from the Auth Provider in order to display the shopping cart when 
+  // Get the shopping cart state from the ShopProvider in order to display the shopping cart when 
   // the shoppping cart icon is clicked
-  const { showCart, showWish, showSearch } = useAuth()
+  const { showCart } = useShop()
+
+  // Get the WishList state from the WishListProvider to display the WishList
+  const { showWish } = useWish()
+
+  // Get the Search bar state for the SearchProvider to display the searchBar
+  const { showSearch } = useSearch()
 
   return (
     <div className="App">

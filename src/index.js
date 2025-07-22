@@ -8,18 +8,27 @@ import Footer from './components/common/footer/Footer'
 import HeaderOne from './components/common/header/headerone/HeaderOne';
 import AuthProvider from './contexts/AuthProvider';
 import HeaderRight from './components/common/header/headerright/HeaderRight';
+import ShopProvider from './contexts/ShopProvider';
+import WishProvider from './contexts/WishListProvider';
+import SearchProvider from './contexts/SearchProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <BrowserRouter>
-        <HeaderOne />
-        <Header />
-        <HeaderRight />
-          <App />
-        <Footer />
-      </BrowserRouter>
+      <ShopProvider>
+        <WishProvider>
+          <SearchProvider>
+            <BrowserRouter>
+              <HeaderOne />
+              <Header />
+              <HeaderRight />
+                <App />
+              <Footer />
+            </BrowserRouter>
+          </SearchProvider>
+        </WishProvider>
+      </ShopProvider>
     </AuthProvider>
   </React.StrictMode>
 );

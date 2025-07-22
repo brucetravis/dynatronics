@@ -13,7 +13,7 @@ export default function LeftCards() {
         </div>
 
         <div className="promo-card small-left-card-two text-white mt-4" >
-            <video controls autoPlay loop >
+            <video muted autoPlay loop >
                 <source src={samsungVideo} type='video/mp4' />
                 Your browser does not suppoert the video tag
             </video>

@@ -2,13 +2,13 @@ import React from 'react'
 import './ShoppingCart.css'
 import { motion } from 'framer-motion'
 import { TrashIcon, XCircle } from 'lucide-react'
-import { useAuth } from '../../contexts/AuthProvider'
+import { useShop } from '../../contexts/ShopProvider'
 
 export default function ShoppingCart() {
 
   // Get the cart function from the Auth state in order to enable the cart to be hidden 
   // when It is displayed
-  const { setShowCart, cartProducts } = useAuth()
+  const { setShowCart, cartProducts, removeCartProduct, checkOut } = useShop()
 
   
   
@@ -46,17 +46,20 @@ export default function ShoppingCart() {
               <div className='card-info'>
                 <h6 className='text-white fw-bold '>{cartProduct.name}</h6>
                 <span className='cart-desc fw-bold'>{cartProduct.description}</span>
-                <div className='mb-3 mt-1'>
-                  <span className='text-warning'>Ksh {Number(cartProduct.price).toLocaleString()}</span>
-                </div>
                 
-                <div className='d-flex align-items-center justify-content-between'>
+                <p className='text-warning fw-bold fs-5 mt-2'>Ksh {Number(cartProduct.price).toLocaleString()}</p>
+                
+                <div className='buttonAndTrash d-flex align-items-center justify-content-between'>
                   <div className='d-flex align-items-center gap-2'>
                     <button>-</button>
-                    <span className='text-info mb-3'>{cartProduct.quantity}</span>
+                    <span className='text-info fs-5 fw-bold mb-3'>{cartProduct.quantity}</span>
                     <button>+</button>
                   </div>
-                  <TrashIcon size={20} className='remove-icon text-danger' />
+                  <TrashIcon 
+                    size={20} 
+                    className='remove-icon text-danger' 
+                    onClick={() => removeCartProduct(cartProduct.id)}
+                  />
                 </div>
               </div>
             </div>
@@ -66,7 +69,10 @@ export default function ShoppingCart() {
 
 
 
-        <button className='checkout-button-cart'>
+        <button 
+          className='checkout-button-cart mt-3'
+          onClick={checkOut}
+        >
           Proceed To checkOut
         </button>
     </motion.div>

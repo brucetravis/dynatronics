@@ -77,14 +77,14 @@
 
 
 .cart-card {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(32, 31, 31, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s ease;
   /* height: 500px; */
-  width: 400px;
+  width: 450px;
   margin-bottom: 10px;
   padding: 10px;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px);
 }
 
 
@@ -115,6 +115,12 @@
 
 .remove-icon:hover {
   transform: scale(1.2);
+}
+
+
+.buttonAndTrash {
+    /* background-color: red; */
+    width: 300px;
 }
 
 /* .card-info {

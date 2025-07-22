@@ -21,7 +21,13 @@ export default function Footer() {
             <li><Link to='/home'>Home</Link></li>
             <li><Link to='/'>Shop</Link></li>
             <li><Link to='/about'>About</Link></li>
-            <li><Link to='/contact'>Contact</Link></li>
+            <li>
+              <a
+                href='tel:+254 712 345 678'
+              >
+                Contact
+              </a>
+            </li>
           </ul>
         </div>
 

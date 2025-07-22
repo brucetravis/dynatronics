@@ -8,7 +8,7 @@ export default function RightCards() {
   return (
     <div className="col-12 col-md-3">
       <div className="promo-card small-right-card-one text-white mt-4" >
-        <video controls autoPlay loop className='big-video'>
+        <video muted autoPlay loop className='big-video'>
           <source src={headPhonesVideo} type='video/mp4' />
           Your browser does not suppoert the video tag
         </video>

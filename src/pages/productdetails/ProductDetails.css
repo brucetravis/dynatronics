@@ -20,7 +20,14 @@
     color: white;
     font-size: 100px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #00FFAB;
+    height: 50vh;
 }
+
 
 .product-details-image  img {
     width: 100%;

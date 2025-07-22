@@ -2,12 +2,14 @@ import React from 'react'
 import './SearchBar.css'
 import { motion } from 'framer-motion'
 import { XCircle } from 'lucide-react'
-import { useAuth } from '../../contexts/AuthProvider'
+import { useSearch } from '../../contexts/SearchProvider'
 
 export default function SearchBar() {
 
   // Get the state function from the uth Provider in order to update the function
-  const { setShowSearch } = useAuth()
+  const { setShowSearch, searchTerm, handleSearch } = useSearch()
+
+
 
   return (
     <motion.div
@@ -29,6 +31,8 @@ export default function SearchBar() {
         animate={{ width: 500, opacity: 1 }}
         transition={{ duration: 0.5 }}
         placeholder='Search Products'
+        value={searchTerm}
+        onChange={handleSearch}
         className='search-bar-input'
       
       />

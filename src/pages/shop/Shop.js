@@ -4,7 +4,7 @@ import CategoryCards from '../../components/cards/categorycards/CategoryCards'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../components/configs/firebase/firebase'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthProvider'
+import { useShop } from '../../contexts/ShopProvider'
 
 
 export default function Shop() {
@@ -12,12 +12,16 @@ export default function Shop() {
   // React state to render all the products
   const [ showProducts, sethowProducts ] = useState([]) // Initially It is an empty array
 
+  // loading state to control the page loading
+  const [ loading, setLoading ] = useState(false) // Initial state is false
 
-  // Get the cart function for the Auth in order to update the function
-  const { fetchCartProduct } = useAuth()
+  // Get the cart function from the ShopProvider in order to update the function
+  const { fetchCartProduct } = useShop()
 
   // function to fetch products from firestore
   const fetchProducts = async () => {
+    // Set loading to true before the fetch starts
+    setLoading(true)
     
     try {
       // Get all the products data as of now
@@ -41,6 +45,9 @@ export default function Shop() {
 
     } catch (err) {
       console.error("Error fetching products", err)
+    } finally {
+      // Set loading to false after loading is done
+      setLoading(false)
     }
   }
 
@@ -71,36 +78,42 @@ export default function Shop() {
       </div>
 
       <div className='products-section'>
-        {showProducts.map((product) => (
-          <div
-            key={product.id}
-            className='product-card'
-          >
-            <img 
-              src={product.imageUrl}
-              alt="Product pic"
-              className='product-image'
-              onClick={()=> handleClick(product.id)}
-            />
-
-            <div className='product-info'>
-              <h3 className='product-title'>{product.name}</h3>
-              <p className='product-price'>
-                <span className='fs-5'>Ksh</span> {Number(product.price).toLocaleString()} 
-              </p>
-              <p className='product-quantity'>
-                {product.quantity} Left
-              </p>
-            </div>
-
-            <button 
-              className='add-to-cart-button'
-              onClick={() => fetchCartProduct(product.id)} // call the function when clicked
-            >
-              Add to cart 
-            </button>
+        {loading ? (
+          <div className='shop-loading'>
+            Fetching Products........
           </div>
-        ))}
+        ) : (
+          showProducts.map((product) => (
+            <div
+              key={product.id}
+              className='product-card'
+            >
+              <img 
+                src={product.imageUrl}
+                alt="Product pic"
+                className='product-image'
+                onClick={()=> handleClick(product.id)}
+              />
+
+              <div className='product-info'>
+                <h3 className='product-title'>{product.name}</h3>
+                <p className='product-price'>
+                  <span className='fs-5'>Ksh</span> {Number(product.price).toLocaleString()} 
+                </p>
+                <p className='product-quantity'>
+                  {product.quantity} Left
+                </p>
+              </div>
+
+              <button 
+                className='add-to-cart-button'
+                onClick={() => fetchCartProduct(product.id)} // call the function when clicked
+              >
+                Add to cart 
+              </button>
+            </div>
+          ))
+          )}
       </div>
     </div>
   )
