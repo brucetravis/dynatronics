@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import { auth, db } from '../components/configs/firebase/firebase'
-import { addDoc, collection, doc, getDoc, getDocs, serverTimestamp, setDoc } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, serverTimestamp } from "firebase/firestore"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 
@@ -67,38 +67,14 @@ export default function ShopProvider({ children }) {
             // solution: store the product to localStorage
             
             // Storing in Local Storage
-            // localStorage.setItem("CartItems", JSON.stringify(updatedCart))
-            
+            localStorage.setItem("CartItems", JSON.stringify(updatedCart))
             // Notify the use that the product has been added successfully
             toast.success("Product Added to Cart Successfully")
-
-
-  
-
 
             // return the updated cart
             return updatedCart
           }
       })
-
-      // save the products of the current user to the users cart
-      const user = auth.currentUser
-
-      // If It is the current user
-      if (user) {
-
-        // create a refernce to where the product will be saved to each users cart under each Id
-        const userCartRef = doc(db, "users", user.uid, "Cart", productId)
-
-        // save the document to the referenced location
-        // setDoc creates or references a document to the reference I just made
-        await setDoc(userCartRef, {
-          // Get the id since It is stored separately from the other data
-          id: productSnapShot.id,
-          // spread out the product data
-          ...productSnapShot.data()
-        })
-      }
       } catch (err) {
         console.error("There was a Problem Fetching the Document from firestore", err)
       }
@@ -108,44 +84,14 @@ export default function ShopProvider({ children }) {
     // Another Problem is Even afteer we have stored the Products in firestore, teh cart is still cleared on refresh
     // since we have not taken the products from firestore to render them later
     useEffect(() => {
-      // // Get the products from firestore
-      // const storedItems = localStorage.getItem("CartItems")
+      // Get the products from firestore
+      const storedItems = localStorage.getItem("CartItems")
     
-      // // If they have been stored in firestore
-      // if (storedItems) {
-      //   // Parse the Items as JavaScript object to get the Item
-      //   setCartProducts(JSON.parse(storedItems))
-      // }
-
-      const fetchUserCart = async () => {
-
-        // The current user 
-        const user = auth.currentUser
-        
-        // If It Is not the user return nothing 
-        if (!user) return
-
-        try {
-          // create a reference to the users cart in the database
-          const cartCollectionRef = collection(db, "users", user.id, "Cart")
-          // products in the database
-          const cartSnapShot = await getDocs(cartCollectionRef)
-
-          const userCartItems = cartSnapShot.docs.map(document => ({
-            // Get the document I=d which is stored separately
-            id: document.id,
-            ...document.data()
-          }))
-
-          // Update the state with the cart Items
-          setCartProducts(userCartItems)
-
-        } catch (err) {
-          console.error("Error fetching Items", err)
-        }
+      // If they have been stored in firestore
+      if (storedItems) {
+        // Parse the Items as JavaScript object to get the Item
+        setCartProducts(JSON.parse(storedItems))
       }
-
-      fetchUserCart() // call the function 
     }, [])
 
 
