@@ -1,8 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import { auth, db } from '../components/configs/firebase/firebase'
-import { addDoc, collection, doc, getDoc, serverTimestamp } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, serverTimestamp, setDoc } from "firebase/firestore"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { onAuthStateChanged } from "firebase/auth"
 
 
 
@@ -26,91 +27,149 @@ export default function ShopProvider({ children }) {
     const [ prodCount, setProdCount ] = useState(1) // The initial state is one
 
 
-    // function to fetch a specific cart product fro firestore and add It to the cart
+    // function to add products to cart
     const fetchCartProduct = async (productId) => {
 
       try {
-        // Create a reference to the product in firestore
-        const productRef = doc(db, "Products", productId)
-
-        // Take a SnapShot of the current product data to Get the curent data as of now
-        const productSnapShot = await getDoc(productRef)
+        // Create a reference to a specific product according to It's Id
+        const cartProductRef = doc(db, "Products", productId)
+        // Take a SnapShot of the product to get It's data
+        const cartProductSnapShot = await getDoc(cartProductRef)
         
-        // Update the cart state with the product data
+        // Update the state using the function
         setCartProducts((prev) => {
-          
-          // Check If the product has alreday been added to the cart
-          const alreadyCartItem = prev.some(item => item.id === productSnapShot.id)
 
-          // If It is true that the product has already been added to cart
-          if (alreadyCartItem) {
-            // Notify the user that the product is already in the cart
-            toast.warning("Product Already in Cart")
-            // Do not add the product to Cart
-            return
+          // Check If the product already exists in the cart
+          const existingProduct = prev.some(item => item.id === productId)
+
+          // If the product already exists
+          if (existingProduct) {
+            // Notigy the user that the product already exists
+            toast.warning("Product already exists in Cart")
+            // return all previous products
+            return prev // If we don't undefined will be returned and cause an error
           
           } else {
-            // Add the product to cart
 
-            // A new array to return
+            // Update the state with an array of the products from the database
             const updatedCart = [
-              // Get all the previous cart Items to keep track of them
+              // spread out/Copy all previous products into the cart
               ...prev, {
-                // Get the product Id since It is stored separately
-                id: productSnapShot.id,
-                // Spread out all the product data (details of the product)
-                ...productSnapShot.data()
+                // Get the Id which was stored separately
+                id: cartProductSnapShot.id,
+                ...cartProductSnapShot.data() // spread out the product data
               }
             ]
-            
-            // Another Problem we have to solve is that when we refresh the page the cart will be cleared
-            // solution: store the product to localStorage
-            
-            // Storing in Local Storage
-            localStorage.setItem("CartItems", JSON.stringify(updatedCart))
-            // Notify the use that the product has been added successfully
-            toast.success("Product Added to Cart Successfully")
 
-            // return the updated cart
+            console.log(updatedCart)
+
+            // Notify the user that the product has been added to Cart successfully
+            toast.success("Product Added to cart successfully.")
+
+            // return all the products
             return updatedCart
           }
-      })
+
+        })
+
+        // save the products to the cart according to the userId
+
+        // Get the current user
+        const user = auth.currentUser
+
+        // If It is the current user
+        if (user) {
+          
+          // Create a reference to where the product will be stored in the cart of each users Id
+          const userCartRef = doc(db, "users", user.uid, "Cart", productId)
+
+          // Save the users cart products in that referenced sub-collection
+          await setDoc(userCartRef, {
+            // Spread out all the other product details in the cart
+            ...cartProductSnapShot.data()
+          })
+        
+        }
+        
       } catch (err) {
-        console.error("There was a Problem Fetching the Document from firestore", err)
+        console.error("Error fetching Products from cart: ", err)
       }
     }
 
 
-    // Another Problem is Even afteer we have stored the Products in firestore, teh cart is still cleared on refresh
-    // since we have not taken the products from firestore to render them later
+    // useEffect to fetch the cart products from the "Cart" sub-collection on mount/ when the page mounts
     useEffect(() => {
-      // Get the products from firestore
-      const storedItems = localStorage.getItem("CartItems")
-    
-      // If they have been stored in firestore
-      if (storedItems) {
-        // Parse the Items as JavaScript object to get the Item
-        setCartProducts(JSON.parse(storedItems))
-      }
+      
+      // function to fetch a users cart
+      const unsubscribe = onAuthStateChanged(auth, async (user) => {
+
+        // If the user is not logged in meaning that It is undefined
+        if (!user) {
+          // Clear the cart
+          setCartProducts([])
+
+          return 
+        } else {
+          // Create a reference to the exact location where the products have been stored
+          const userCartCollectionRef = collection(db, "users", user.uid, "Cart")
+
+          // Get the data of all documents from that collection
+          const productSnapShot = await getDocs(userCartCollectionRef)
+
+          // log the products for debugging purposes
+          console.log(productSnapShot)
+
+          // Map through all the documents to get the Id and the data
+          const userCart = productSnapShot.docs.map(document => ({
+            // Get the Id that has been stored separately
+            id: document.id,
+            // Spread out the rest of the data
+            ...document.data()
+          }))
+
+          // console.log(userCart)
+
+          // Update the cart with the products that have been saved to each users cart collection
+          setCartProducts(userCart)
+        }
+
+      })
+
+      return () => unsubscribe() // clean up the listener
     }, [])
 
 
-    // Function to remove an Item from the cart
-    const removeCartProduct = (productId) => {
 
+    // function to remove an Item from the cart
+    const removeCartProduct = async (productId) => {
+
+      // Update the state to remain with all products except from the product removed
       setCartProducts((prev) => {
-        // Filter and keep all Items except the removed Item
-        const updatedCart = prev.filter(item => item.id !== productId)
-        
-        // Update the localStorage with the new array of Items
-        localStorage.setItem("CartItems", JSON.stringify(updatedCart))
+        // filter the state to only remain with products the are not the removed product
+        const filteredProducts = prev.filter(product => product.id !== productId)
 
-        // Notify the user that the product has been removed from Cart Successfully
-        toast.success("Product Removed from Cart Successfully")
-        
-        // return the updated cart array
-        return updatedCart
+        // Return the products
+        return filteredProducts
       })
+
+      // Notify the user that the product has been removed
+      toast.success("Product removed from Cart Successfully.")
+
+      // Remove the product from the data base subcollection
+      try {
+
+        // Get the current user
+        const user = auth.currentUser
+        // Create a reference to the sub-collection
+        const removedProductRef = doc(db, "users", user.uid, "Cart", productId)
+
+        // Remove the document
+        await deleteDoc(removedProductRef)
+
+      } catch (err) {
+        console.error("Error Removing Product from database")
+      }
+
     }
 
 
@@ -151,7 +210,7 @@ export default function ShopProvider({ children }) {
       setCartProducts([])
 
       // Clear the localStorage
-      localStorage.removeItem("CartItems")
+      // localStorage.removeItem("CartItems")
 
       // Inform the user that order is in progress
       toast.success("Order placed — complete payment to proceed 🔐")

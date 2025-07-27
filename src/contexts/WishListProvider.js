@@ -1,7 +1,8 @@
-import { doc, getDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
-import { db } from "../components/configs/firebase/firebase";
+import { auth, db } from "../components/configs/firebase/firebase";
 import { toast } from "react-toastify";
+import { onAuthStateChanged } from "firebase/auth";
 
 
 // Create the WishList context
@@ -20,88 +21,135 @@ export default function WishProvider({ children }) {
     const [ wishListProducts, setWishListProducts ] = useState([]) // Initial state is an array
 
 
-    // Function to fetch a specific product/document from the database
+    // function to fetch WishList products
     const fetchWishListProduct = async (productId) => {
 
-        try {
-            // Create a reference to a specific document in firestore
-            const wishProdRef = doc(db, "Products", productId)
+       try {
+        // Create a reference to a specific product in the database according to the product Id
+        const wishListProductRef = doc(db, "Products", productId)
 
-            // SnapShot of the product
-            const wishProdSnapShot = await getDoc(wishProdRef)
-            
-            // Update the state that will render the product data
-            setWishListProducts((prev) => {
+        // Get the product data
+        const wishListProductSnapShot = await getDoc(wishListProductRef)
 
-                // Check If the product has already been added to WishList
-                const alreadyInWishList = prev.some(item => item.id === productId)
+        // Update the function to display the added product
+        setWishListProducts((prev) => {
 
-                if (alreadyInWishList) {
-                    // Notify the user thet the product is already in the WishList
-                    toast.warning("Product already in WishList")
-                    // Exit the function and return the remaining Items
-                    return prev 
-                }
+            // Check If the product has already been added to the cart
+            const alreadyInWish = prev.some(item => item.id === productId)
 
-                // An array to update the state when a new product is added
-                const updatedWishList = [
-                    // Get all the previous wishList products to keep track of them
-                    ...prev,
-                    {
-                        // Get the data that has been stored searately in firestore
-                        id: wishProdSnapShot.id,
-                        // Spread all the product data
-                        ...wishProdSnapShot.data()
+            // If It is true that the Item is already in the WishList
+            if (alreadyInWish) {
+                // Notify the user
+                toast.warning("Product Already In WishList")
+                // Return all the current wishList products
+                return prev
+            } else {
+                // Update the function with an array
+                const updateWishList = [
+                    ...prev, {
+                        // Get the product Id which has been stored separartely from the other products data
+                        id: wishListProductSnapShot.id,
+                        ...wishListProductSnapShot.data()
                     }
                 ]
 
-                // store the products in localStorage to prevent the wishList from being cleared when the page is refreshed
-                localStorage.setItem("WishListItems", JSON.stringify(updatedWishList))
+                // Notify the user that the product has already been added to the WishList
+                toast.success("Product Added To WishList Successfully.")
 
-                // Inform the user that the product has been added to the wishList
-                toast.success("Product Added To WishList")
+                // Return all WishList Products
+                return updateWishList
+            }
 
-                // Return all the products so that they can be rendered
-                return updatedWishList
+        })
+
+        // save the product to a sub-collection according to the userId
+
+        // A specific user
+        const user = auth.currentUser
+
+        // If It is the current logged in user
+        if (user) {
+            // Create a reference to where the product will be saved when It is added to the wishList
+            const savedWishProductRef = doc(db, "users", user.uid, "WishList", productId)
+            // save the document to the defied location/reference
+            await setDoc(savedWishProductRef, {
+                // spread out the wishList product data
+                ...wishListProductSnapShot.data()
             })
-            
-        } catch (err) {
-            console.error("Error fetching Product fro WishList", err)
         }
+
+
+       } catch (err) {
+        console.error(" Error Fetching Product from firestore: ", err)
+       }
+
     }
 
 
-    // useEffect to fetch the products from localStorage when the page is refreshed os mounted
+    // useEffect to fetch the products from the "WishList" subcollection in the database
+    // This is to display the products even after page reload/ refresh
     useEffect(() => {
-        // Get the products stored in localStorage
-        const storedProducts = localStorage.getItem("WishListItems")
-        
-        // Check If It exists
-        if (storedProducts) {
-            // Update the state with the a parsed version
-            setWishListProducts(JSON.parse(storedProducts))
-        }
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+            
+            // If the current state is null, menaing no user
+            if (!user) {
+                // clear the wishList
+                setWishListProducts([])
+                return
+                
+            } else {
+                // Create a reference to the withList subcollection to get all products
+                const userWishProdRef = collection(db, "users", user.uid, "WishList")
+                // Get a SnapShot of those Products
+                const savedWishSnapShot = await getDocs(userWishProdRef)
+
+                const wishProductData = savedWishSnapShot.docs.map(product => ({
+                    // Get the Id that has been stored separately
+                    id: product.id,
+                    // Get the other product data
+                    ...product.data()
+                }))
+
+                // Update the WishList function with the products
+                setWishListProducts(wishProductData)
+            }
+            
+        })
+
+        return () => unsubscribe() // clean up the listener
     }, [])
 
 
-    // Function to remove an Item stored in the WishList
-    const removeWishItem = (productId) => {
 
-        // Function to update the wishList
+    // function to remove a product from wishList
+    const removeWishItem = async (productId) => {
+
+        // Update the function
         setWishListProducts((prev) => {
 
-            // Filter the wishList to only remain with the products that you want
-            const updatedWishList = prev.filter(item => item.id !== productId)
+            // Filter the current Items and remain with Items that are not equal to the removed Item
+            const filteredWishList = prev.filter(item => item.id !== productId)
 
-            // Update local storage wiht a new array of Items
-            localStorage.setItem("WishListItems", JSON.stringify(updatedWishList))
-
-            // Inform the user that the product has been removed from wishList
-            toast.success("Product Removed from WishList successfully")
-        
-            return updatedWishList
+            // return the Itsm saved in the WishList
+            return filteredWishList
         })
 
+        // Notify the user that the product has been removed from the WishList
+        toast.success("Product removed from WishList successfully")
+
+        try {
+            // Get the current user Id
+            const user = auth.currentUser
+
+            // Create a reference to the document that you want to remove
+            const removedWishListProductRef = doc(db, "users", user.uid, "WishList", productId)
+
+            // Remove the product
+            await deleteDoc(removedWishListProductRef)
+        
+        } catch (err) {
+            console.error("Error removing Product from WishList: ", err)
+        }
     }
 
     // function to clear the wishList
@@ -111,7 +159,7 @@ export default function WishProvider({ children }) {
         setWishListProducts([])
 
         // Remove the localStorage folder
-        localStorage.setItem("WishListItems", JSON.stringify([]))
+        // localStorage.setItem("WishListItems", JSON.stringify([]))
     
         // Notify the user that the wishList has been cleared successfully
         toast.success("WishList cleared Successfully")

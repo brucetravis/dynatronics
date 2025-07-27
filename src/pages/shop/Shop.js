@@ -16,7 +16,7 @@ export default function Shop() {
   const [ loading, setLoading ] = useState(false) // Initial state is false
 
   // Get the cart function from the ShopProvider in order to update the function
-  const { fetchCartProduct } = useShop()
+  // const { fetchCartProduct } = useShop()
 
   // function to fetch products from firestore
   const fetchProducts = async () => {

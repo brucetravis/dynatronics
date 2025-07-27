@@ -105,11 +105,11 @@ export default function ProductDetails() {
                                 <span className='fs-5 me-1'>Name:</span>{productInfo.name}
                             </p>
 
-                            <p className='detail-price'>
+                            <div className='detail-price'>
                                 <p>Price: <span className='fs-5 me-1 text-warning'>Ksh {Number(productInfo.price).toLocaleString()}</span></p>
-                            </p>
+                            </div>
 
-                            <p className='detail-quantity'>
+                            <div className='detail-quantity'>
                                 <span className='fs-5 me-1'>Quantity:</span>
                                 <input 
                                     type='text'
@@ -117,7 +117,7 @@ export default function ProductDetails() {
                                     readOnly
                                 />
                                 
-                            </p>
+                            </div>
 
                             <div className='mb-4'>
                                 <button

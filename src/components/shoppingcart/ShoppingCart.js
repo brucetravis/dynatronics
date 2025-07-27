@@ -8,7 +8,7 @@ export default function ShoppingCart() {
 
   // Get the cart function from the Auth state in order to enable the cart to be hidden 
   // when It is displayed
-  const { setShowCart, cartProducts, removeCartProduct, checkOut, prodCount, setProdCount } = useShop()
+  const { setShowCart, cartProducts, removeCartProduct, checkOut } = useShop()
 
   const [ _, setForceRender ] = useState(false);
 
@@ -49,7 +49,7 @@ export default function ShoppingCart() {
         {/* render the cart products */}
         {cartProducts.map((cartProduct) => (
           <div
-            id={cartProduct.id} 
+            key={cartProduct.id} 
             className='cart-card'
           >
             <div className='cart-content'>
