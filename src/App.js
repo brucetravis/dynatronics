@@ -17,6 +17,8 @@ import SearchBar from './components/searchbar/SearchBar';
 import { useShop } from './contexts/ShopProvider';
 import { useWish } from './contexts/WishListProvider';
 import { useSearch } from './contexts/SearchProvider';
+import Payment from './pages/payment/Payment';
+import About from './pages/about/About';
 
 function App() {
 
@@ -35,6 +37,8 @@ function App() {
       <Routes>
         <Route path={'/'} element={<Shop />} />
         <Route path={'/home'} element={<Home />} />
+        <Route path={'/about'} element={<About />} />
+        <Route path={'/payment/:userId'} element={<Payment />} />
         <Route path={'/register'} element={<Register />} />
         <Route path={'/productsupload'} element={<ProductsUpload />} />
         <Route path='/productdetails/:id' element={<ProductDetails />} />

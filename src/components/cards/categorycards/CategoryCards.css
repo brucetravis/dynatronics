@@ -9,8 +9,8 @@
   display: flex;
   /* gap: 8px; */
   justify-content: center;
-  flex-wrap: wrap;
-  overflow: hidden;
+  /* flex-wrap: wrap; */
+  overflow-x: hidden;
   border-bottom: 0.1px solid #0dcaf0;
 }
 .cards-track::-webkit-scrollbar { display: none; }  /* Chrome */

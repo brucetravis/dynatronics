@@ -123,6 +123,13 @@
     width: 300px;
 }
 
+.buttonAndTrash button {
+    background: none;
+    border: 2px solid #00FFAB;
+    border-radius: 5px;
+}
+
+
 /* .card-info {
     text-align: justify;
 }

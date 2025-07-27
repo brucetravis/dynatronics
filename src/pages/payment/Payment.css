@@ -1,0 +1,86 @@
+.payment-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  height: 80vh;
+  padding-top: 30vh;
+}
+
+
+.products-paid {
+  background-image: url(../../images/vr-glasses/vr-glasses-6.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 30px;
+  /* height: 100vh; */
+  border-top-left-radius: 10px;
+}
+
+
+.prod-flex {
+  height: 50vh;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+
+.prod-pay-details {
+  padding: 50px;
+  width: 30vw;
+  /* height: 50vh; */
+  display: flex;
+  gap: 30px;
+  margin-bottom: 1vh;
+  background-color: rgb(255, 255, 255, 0.2);
+}
+
+.prod-pay-details img {
+  height: 100px;
+  width: 130px;
+  object-fit: cover;
+}
+
+
+.prod-pay-info {
+  text-align: justify;
+}
+
+.prod-pay-info .name {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.prod-pay-info .desc {
+  color: #00FFAB;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.payment-method {
+  background-color: red;
+  width: 30vw;
+  padding: 30px;
+}
+
+
+@media screen and (max-width: 992px) {
+
+  .payment-page {
+    padding-top: 25vh;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: auto;
+  }
+
+  .prod-pay-details {
+    width: 100%;
+  }
+  
+  .payment-column {
+    flex-direction: column;
+  }
+}

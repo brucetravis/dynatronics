@@ -100,17 +100,17 @@ export default function Shop() {
                 <p className='product-price'>
                   <span className='fs-5'>Ksh</span> {Number(product.price).toLocaleString()} 
                 </p>
-                <p className='product-quantity'>
+                {/* <p className='product-quantity'>
                   {product.quantity} Left
-                </p>
+                </p> */}
               </div>
 
-              <button 
+              {/* <button 
                 className='add-to-cart-button'
                 onClick={() => fetchCartProduct(product.id)} // call the function when clicked
               >
                 Add to cart 
-              </button>
+              </button> */}
             </div>
           ))
           )}

@@ -1,0 +1,9 @@
+.about-page {
+    padding-top: 20vh;
+    background-image: url(../../images/vr-glasses/vr-glasses-6.jpg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh;
+}
+

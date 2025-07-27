@@ -167,7 +167,7 @@ export default function Form() {
             if (role === "admin") {
                 navigate("/home", { replace: true })
             } else if (role === "user") {
-                navigate("/shop", { replace: true })
+                navigate("/", { replace: true })
             }
         } catch (err) {
             console.log(err.code, err.message)

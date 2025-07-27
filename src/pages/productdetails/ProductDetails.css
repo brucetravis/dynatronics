@@ -17,15 +17,13 @@
 
 
 .product-details-loading {
-    color: white;
-    font-size: 100px;
-    font-weight: bold;
+    padding-top: 18vh;
+    height: 50vh;
+    color: #00FFAB;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    color: #00FFAB;
-    height: 50vh;
 }
 
 

@@ -26,6 +26,7 @@ export default function ProductDetails() {
     // State to load the page when fetching product details
     const [ loading, setLoading ] = useState(false)
 
+
     // useEffct to keep watch on the id so that we can update the product info from tie to time
     useEffect(() => {
         
@@ -105,7 +106,7 @@ export default function ProductDetails() {
                             </p>
 
                             <p className='detail-price'>
-                                <span className='fs-5 me-1'>Price: Ksh</span>{Number(productInfo.price).toLocaleString()}
+                                <p>Price: <span className='fs-5 me-1 text-warning'>Ksh {Number(productInfo.price).toLocaleString()}</span></p>
                             </p>
 
                             <p className='detail-quantity'>

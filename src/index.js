@@ -14,23 +14,23 @@ import SearchProvider from './contexts/SearchProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <AuthProvider>
-      <ShopProvider>
-        <WishProvider>
-          <SearchProvider>
-            <BrowserRouter>
-              <HeaderOne />
-              <Header />
-              <HeaderRight />
-                <App />
-              <Footer />
-            </BrowserRouter>
-          </SearchProvider>
-        </WishProvider>
-      </ShopProvider>
-    </AuthProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+    <BrowserRouter>
+      <AuthProvider>
+        <ShopProvider>
+          <WishProvider>
+            <SearchProvider>
+                <HeaderOne />
+                <Header />
+                <HeaderRight />
+                  <App />
+                <Footer />
+            </SearchProvider>
+          </WishProvider>
+        </ShopProvider>
+      </AuthProvider>
+    </BrowserRouter>
+  // </React.StrictMode>
 );
 
 
