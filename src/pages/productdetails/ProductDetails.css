@@ -208,6 +208,10 @@
     cursor: pointer;
 }
 
+.buttonAndTrash.details {
+    margin-left: -5vw;
+}
+
 
 @media screen and (max-width: 992px) {
     .product-details {

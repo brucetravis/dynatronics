@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './ProductDetails.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../components/configs/firebase/firebase'
 import { useShop } from '../../contexts/ShopProvider'
 import { useWish } from '../../contexts/WishListProvider'
+import { Minus, Plus } from 'lucide-react'
 
 export default function ProductDetails() {
 
     // Get the function to add products to the Cart
     const { fetchCartProduct, checkOut } = useShop()
 
-    // Get the functino to fetchWishListProducts
+    // satte to rerender when the quantity changes
+    const [ _, setForceRender ] = useState(false)
+
+    // Create a reference for each product quantity
+    const quantityRefs = useRef({})
+
+    // Get the function to fetchWishListProducts
     const { fetchWishListProduct } = useWish()
 
     // React hook to navigate to other pages
@@ -72,11 +79,24 @@ export default function ProductDetails() {
         window.scrollTo(0, 0)
     }, [])
 
+    useEffect(() => {
+        // Set the initial quantity for each product
+
+
+        // If the quantity is undefined
+        if (productInfo && quantityRefs.current[productInfo.id] === undefined) {
+            // Set the current/Initial quantity to 1
+            quantityRefs.current[productInfo.id] = 1
+        }
+
+    }, [productInfo])
+
     // If firebase is still getting the product data
     // if (loading) return <div className='product-details-loading text-center'> Loading Product data........</div>
 
     // if the product data has not been found in the database
     if (productInfo === "Product Not Found") return <div>Product Not Found</div>
+
 
   return (
     <>
@@ -119,6 +139,49 @@ export default function ProductDetails() {
                                     readOnly
                                 />
                                 
+                            </div>
+
+                            <div className='buttonAndTrash details d-flex align-items-center justify-content-center mt-2 gap-2'>
+                                <button
+                                    className='text-danger'
+                                    onClick={() => {
+                                        // current quantity of each product
+                                        const currentQty = quantityRefs.current[productInfo.id]
+
+                                        // If the current quantity is greater than 1
+                                        if (currentQty > 1) {
+                                            // Subtract 1
+                                            quantityRefs.current[productInfo.id] -= 1
+                                            // Update the state to render
+                                            setForceRender(prev => !prev)
+                                        }
+                                    }}
+                                >
+                                    <Minus
+                                        size={18}
+                                    />
+                                </button>
+                                <p className='text-info fs-5'>{quantityRefs.current[productInfo.id] || 1}</p>
+                                <button
+                                    style={{ color: "#00FFAB" }}
+                                    onClick={() => {
+                                        // max quantity of each product
+                                        const maxQty = productInfo.quantity
+                                        // current quantity of the product
+                                        const currentQty = quantityRefs.current[productInfo.id]
+
+                                        // If the max quantity is less than the current quantity
+                                        if (currentQty < maxQty) {
+                                            quantityRefs.current[productInfo.id] += 1
+                                            // Update the state
+                                            setForceRender(prev => !prev)
+                                        }
+                                    }}
+                                >
+                                    <Plus 
+                                        size={18}
+                                    />
+                                </button>
                             </div>
 
                             <div className='mb-4'>

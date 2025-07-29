@@ -14,7 +14,7 @@ export default function ShoppingCart() {
 
 
   // create a refrence object for each product
-  const quantityRefs = useRef({})
+  const quantityRefs = useRef({}) // Initial ref is an object
 
 
   // useEffect to ensure that each product has Its initial quantity set to 1 even when a new product is added later

@@ -69,7 +69,7 @@ export default function CategoryDetails() {
 
   // If No Products have been found In the database that match the spcific category
   if (categoryProducts.length === 0) {
-    return <div className='no-category-products-found'><p>No Products Found For this specific Category.&nbsp;<span className='text-warning'>{categoryName}</span>&nbsp;.Go back to <Link to='/'>Shop</Link></p></div>
+    return <div className='no-category-products-found'><p>No Products Found For this specific Category.&nbsp;<span className='text-warning'>{categoryName}</span>&nbsp;.Go back to <Link to='/'>Shop</Link></p><br />Coming Soon</div>
   }
 
   return (
