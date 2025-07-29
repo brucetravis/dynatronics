@@ -81,7 +81,9 @@ export default function ProductDetails() {
   return (
     <>
         {loading || !productInfo ? (
-            <div className='product-details-loading'> Loading Product data........</div>
+            <div className='product-details-loading'>
+                <p> Loading Product data........</p>
+            </div>
         ) : (
             <div className='product-details-page'>
                 <div className='d-flex align-items-center justify-content-center'>
