@@ -23,7 +23,7 @@ export default function ProductsUpload() {
     const [ loading, setLoading ] = useState(false)
 
 
-    //Initialize useRef to directly speak to the file input in order to clear It because React cannot controll it using states
+    // Initialize useRef to directly speak to the file input in order to clear It because React cannot controll it using states
     const fileInputRef = useRef(null) // It it referring to nothing initially
 
     // function to handle the input term

@@ -183,6 +183,7 @@ export default function ShopProvider({ children }) {
       if (!userId) {
         // Notify the user that they cannot checkout unless thay Log in first
         toast.warning("You cannot CheckOut unless you log in")
+        navigate('/register')
         return // Return undefined the current value of auth
       }
 

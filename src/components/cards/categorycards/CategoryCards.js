@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import './CategoryCards.css';
 import categoryCardsData from '../../data/categoryCardsData';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CategoryCards() {
 
+  // useNavigate to navigate to another page
+  const navigate = useNavigate()
 
   // state to keep track of the current starting Index and reset If we reach the last index
   // Changes when you click Next or Previous.
@@ -60,6 +63,7 @@ export default function CategoryCards() {
           <div 
             key={card.id} 
             className={`category-card ${card.class}`}
+            onClick={() => navigate(`/categorydetails/${card.text}`)}
           >
             {card.text}
           </div>

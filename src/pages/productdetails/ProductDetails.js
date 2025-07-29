@@ -21,7 +21,7 @@ export default function ProductDetails() {
     const { id } = useParams()
     
     // states to update the product info according to It's specific details
-    const [ productInfo, setProductInfo ] = useState(null) // Initial state should be nothing since Initially, there wil be no product info in the age
+    const [ productInfo, setProductInfo ] = useState(null) // Initial state should be nothing since Initially, there will be no product info in the age
 
     // State to load the page when fetching product details
     const [ loading, setLoading ] = useState(false)

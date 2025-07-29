@@ -4,7 +4,6 @@ import CategoryCards from '../../components/cards/categorycards/CategoryCards'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../components/configs/firebase/firebase'
 import { useNavigate } from 'react-router-dom'
-import { useShop } from '../../contexts/ShopProvider'
 
 
 export default function Shop() {

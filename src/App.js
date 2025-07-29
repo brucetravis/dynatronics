@@ -19,6 +19,7 @@ import { useWish } from './contexts/WishListProvider';
 import { useSearch } from './contexts/SearchProvider';
 import Payment from './pages/payment/Payment';
 import About from './pages/about/About';
+import CategoryDetails from './pages/categorydetails/CategoryDetails';
 
 function App() {
 
@@ -38,10 +39,11 @@ function App() {
         <Route path={'/'} element={<Shop />} />
         <Route path={'/home'} element={<Home />} />
         <Route path={'/about'} element={<About />} />
-        <Route path={'/payment/:userId'} element={<Payment />} />
         <Route path={'/register'} element={<Register />} />
+        <Route path={'/payment/:userId'} element={<Payment />} />
         <Route path={'/productsupload'} element={<ProductsUpload />} />
         <Route path='/productdetails/:id' element={<ProductDetails />} />
+        <Route path='/categorydetails/:categoryName' element={<CategoryDetails />} />
       </Routes>
 
       <AnimatePresence>
