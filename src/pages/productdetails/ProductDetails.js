@@ -6,6 +6,7 @@ import { db } from '../../components/configs/firebase/firebase'
 import { useShop } from '../../contexts/ShopProvider'
 import { useWish } from '../../contexts/WishListProvider'
 import { Minus, Plus } from 'lucide-react'
+import { toast } from 'react-toastify'
 
 export default function ProductDetails() {
 

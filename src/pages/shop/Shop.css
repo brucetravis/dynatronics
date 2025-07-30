@@ -19,7 +19,9 @@
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     padding: 16px;
+    /* width: 280px; */
     width: 280px;
+    height: 300px;
     margin: 20px;
     color: #F1F5FA;
     display: flex;
@@ -94,3 +96,21 @@
     font-size: 18px;
 }
 
+.load-more-button {
+    background-color: #00FFAB;
+    color: #0B132B;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 10vh;
+    box-shadow: 0 0 10px #00FFAB;
+    transition: background-color 0.3 ease transform 0.2 ease, box-shadow 0.3 ease;
+}
+
+
+.load-more-button:hover {
+    box-shadow: 0 0 30px #00FFAB;
+    transform: scale(1.03);
+    cursor: pointer;
+}

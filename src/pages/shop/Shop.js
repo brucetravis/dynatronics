@@ -7,7 +7,10 @@ import { useSearch } from '../../contexts/SearchProvider'
 
 export default function Shop() {
 
-  const { filteredProducts, loading } = useSearch()
+  const { filteredProducts, 
+          loading, 
+          loadMoreProducts, 
+          hasMoreProducts } = useSearch()
 
   // Initialize useNavigate in order to naviage to a page displaying all the product details
   const navigate = useNavigate()
@@ -67,6 +70,20 @@ export default function Shop() {
           ))
           )}
       </div>
+
+      {/* Load More Button */}
+      {!loading && hasMoreProducts && (
+        <div className='load-more-container'>
+          <button className='load-more-button' onClick={loadMoreProducts}>
+            Load More
+          </button>
+        </div>
+      )}
+
+      {/* Optional loading indicator for loading next page */}
+      {loading && filteredProducts.length > 0 && (
+        <div className='shop-loading'>Loading more products...</div>
+      )}
     </div>
   )
 }

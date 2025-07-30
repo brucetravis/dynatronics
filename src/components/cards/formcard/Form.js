@@ -131,7 +131,8 @@ export default function Form() {
             // log the error messages to the console
             console.log(err.code, err.message)
             console.log(err.message)
-            toast.error(`Error: ${err.message}`)
+            // toast.error(`Error: ${err.message}`)
+            toast.error(`Error Creating Account, Email Already in use.`)
             
         } finally {
             // Update the loading state to false so that the loading can be completed
@@ -251,7 +252,7 @@ export default function Form() {
                             onClick={() => setShowConfirmPwd((prev) => !prev)}
                             aria-label={ showConfirmPwd ? "Hide Password" : "Show Password" }
                         >
-                            { showPwd ? <Eye size={18} /> : <EyeOff size={18} /> }
+                            { showConfirmPwd ? <Eye size={18} /> : <EyeOff size={18} /> }
                         </button>
                     </label>
                 )}
