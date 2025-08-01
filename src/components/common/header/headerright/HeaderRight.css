@@ -42,3 +42,21 @@
     transform: rotate(180deg);
 }
 
+@media screen and (max-width: 992px) {
+    .header-right {
+        position: fixed;
+        top: 210px;
+        right: 5px;
+        padding: 10px;
+        /* background-color: red; */
+        /* background: rgba(10, 15, 60, 0.6); /* semi-transparent electric panel 
+        border-radius: 12px;
+        box-shadow: 0 0 12px #0DCAF0; 
+        backdrop-filter: blur(6px); */
+        z-index: 500;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+    }
+}

@@ -182,7 +182,7 @@ export default function ShopProvider({ children }) {
       // If no user is logged In, meaning that auth.current.user is undefined
       if (!userId) {
         // Notify the user that they cannot checkout unless thay Log in first
-        toast.warning("You cannot CheckOut unless you log in")
+        toast.warning("You cannot Check out unless you have an Account / Log In")
         navigate('/register')
         return // Return undefined the current value of auth
       }
@@ -207,9 +207,6 @@ export default function ShopProvider({ children }) {
         }
       }
 
-      // Clear the cart
-      setCartProducts([])
-
       // Clear the localStorage
       // localStorage.removeItem("CartItems")
 
@@ -218,6 +215,9 @@ export default function ShopProvider({ children }) {
 
       // navigate to the payment page which is dynamic for each specific user
       navigate(`/payment/${userId}`)
+
+      // Clear the cart
+      // setCartProducts([])
     }
     
 

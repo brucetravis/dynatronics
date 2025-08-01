@@ -8,7 +8,7 @@ export default function ShoppingCart() {
 
   // Get the cart function from the Auth state in order to enable the cart to be hidden 
   // when It is displayed
-  const { setShowCart, cartProducts, removeCartProduct, checkOut } = useShop()
+  const { setShowCart, cartProducts, removeCartProduct, checkOut, setCartProducts } = useShop()
 
   const [ _, setForceRender ] = useState(false);
 
@@ -132,7 +132,18 @@ export default function ShoppingCart() {
 
         <button 
           className='checkout-button-cart mt-3'
-          onClick={() => checkOut(cartProducts)}
+          // onClick={() => checkOut(cartProducts)}
+          onClick={() => {
+            const productWithQuantities = cartProducts.map((product) => ({
+              // Copy all previous products
+              ...product,
+              selectedQuantity: quantityRefs.current[product.id] || 1
+            }))
+
+            setCartProducts(productWithQuantities)
+
+            checkOut(productWithQuantities)
+          }}
         >
           Proceed To checkOut
         </button>

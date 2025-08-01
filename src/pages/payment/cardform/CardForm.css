@@ -1,0 +1,38 @@
+.card-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.card-form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.pay-btn {
+  padding: 1rem;
+  background-color: #ff4c29;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.pay-btn:hover {
+  background-color: #e0421f;
+}

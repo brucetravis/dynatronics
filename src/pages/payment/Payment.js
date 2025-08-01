@@ -1,101 +1,114 @@
 import React, { useEffect, useState } from 'react'
 import './Payment.css'
-import { motion } from 'framer-motion'
-import { useParams } from 'react-router-dom'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../../components/configs/firebase/firebase'
+import PayPal from './paypalform/PayPal';
+import MpesaForm from './mpesaform/MpesaForm';
+import MasterCard from './cardform/mastercard/MasterCard';
+import Visa from './cardform/visa/Visa';
+import { useShop } from '../../contexts/ShopProvider'
+import { useNavigate } from 'react-router-dom';
 
 export default function Payment() {
-  
 
-  // Extract the Id of a specific user to display a dynamic page for users
-  const { userId } = useParams()
+    // state for the default card to be selected
+    const [ selectedCard, setSelectedCard ] = useState('visa') //default card
 
-  // state to store the users purchased Products
-  const [ purchasedUserProducts, setPurchasedUserProducts ] = useState([]) // Initial state is an array
+    // DUMMY DATA
+    // const cartItems = [
+    //   { id: 1, name: 'Gaming Headset', qty: 2, price: 2500, image: require('../../images/gaming/console-1.jpg') },
+    //   { id: 2, name: 'Smart Watch', qty: 1, price: 3500, image: require('../../images/headphones/headphones-1.jpg') },
+    //   { id: 3, name: 'Wireless Mouse', qty: 1, price: 1500, image: require('../../images/gaming/gaming-pad-9.jpg') },
+    // ];
 
-  // useEffect to check the chack which specific user It is
-  useEffect(() => {
+    // const subtotal = cartItems.reduce((total, item) => total + item.price * item.qty, 0);
 
-    // Function to fetch Products from the database
-    const fetchProductsToPay = async () => {
-      
-      try {
-        // Create a reference to the collection of products to get all document
-        const purchasedProductsRef = collection(db, "users", userId, "purchasedProducts")
+    // Get the products from the cart so that we can display them in the payment page
+    const { cartProducts } = useShop()
 
-        // Get a snapShot of all products
-        const purchaseProdRefSnapShot = await getDocs(purchasedProductsRef)
+    const subtotal = cartProducts.reduce((total, item) => total + item.price * item.quantity, 0);
 
-        // payment data
-        const userProducts = purchaseProdRefSnapShot.docs.map((doc) => ({
-          // Get the product Id since It is stored separately from the product data
-          id: doc.id,
-          // spread out all the data
-          ...doc.data()
-        }))
+    // useNavigate to navigate to another page
+    const navigate = useNavigate()
 
-        console.log(userProducts)
-        // Update the purchasedProducts state
-        setPurchasedUserProducts(userProducts)
 
-      } catch (err) {
-        console.error("Error fetching Products from firestore", err)
-      }
-    }
-    
-    // Call the function
-    fetchProductsToPay()
-
-  }, [userId])
+    // useEffect to scroll top of the page on Mount 
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
 
   return (
-    <motion.div
-      initial={{ x: 100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: 'easeIn' }}
-      className='container-fluid my-5 payment-page'
-    >
-      <div className="payment-column d-flex align-items-center ">
-        <div className='products-paid '>
-          <div>
-            <h3 className='text-warning fw-bold'>PURCHASED PRODUCTS</h3>
-            
-            <div
-              className='prod-flex'
-            >
-              {purchasedUserProducts.map((purchasedProduct) => (
-                <div
-                  key={purchasedProduct.id}
-                  className='prod-pay-details'
-                >
-                  <div>
-                    <img 
-                      src={purchasedProduct.imageUrl}
-                      alt={purchasedProduct.name}
-                    />
-                  </div>
-                  
-                  <div className='prod-pay-info'>
-                    <p className='name'>{purchasedProduct.name}</p>
-                    <p className='desc'>{purchasedProduct.description}</p>
-                    <p className='price text-warning fw-bold'>Ksh {Number(purchasedProduct.price).toLocaleString()}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+    <div className='payment-page'>
+      <div className='left-side'>
+        {/* Shopping cart summary */}
+        <h2>Your Shopping Cart</h2>
 
-            <div className='d-flex align-items-center justify-content-center mt-3'>
-              <p className='text-warning fw-bold fs-4'>TOTAL:</p>
+        <div className='cart-items'>
+          {cartProducts.map(item => (
+            <div className='cart-item' key={item.id}>
+              <img src={item.imageUrl} alt={item.name} />
+              <div>
+                <p className='item-name'>{item.name}</p>
+                <p>Qty: {item.selectedQuantity}</p>
+              </div>
+              <p className='item-price'>Ksh {Number(item.price * item.quantity).toLocaleString()}</p>
             </div>
-          </div>
+          ))}
+        </div>
 
+        <div className='subtotal'>
+          <p>Subtotal: <span>Ksh {Number(subtotal).toLocaleString()}</span></p>
+          <button 
+            className='back-btn' 
+            onClick={() => navigate('/')
+          }
+            >← Back to Shop
+          </button>
         </div>
         
-        <div className='payment-method '>
-          
-        </div>
       </div>
-    </motion.div>
+
+      <div className='right-side'>
+        {/* Card Payment Form */}
+        <h2>Card Details</h2>
+
+        <div className='card-icons'>
+          <img
+            src={require('../../images/payment/visa_2.jpg')}
+            alt='Visa'
+            className={selectedCard === 'visa' ? 'active-card' : ''}
+            onClick={() => setSelectedCard('visa')}
+          />
+          <img
+            src={require('../../images/payment/master_card.jpg')}
+            alt='MasterCard'
+            className={selectedCard === 'mastercard' ? 'active-card' : ''}
+            onClick={() => setSelectedCard('mastercard')}
+          />
+
+          <img
+            src={require('../../images/payment/paypal.jpg')}
+            alt='MasterCard'
+            className={selectedCard === 'paypal' ? 'active-card' : ''}
+            onClick={() => setSelectedCard('paypal')}
+          />
+
+          <img
+            src={require('../../images/payment/mpesa.png')}
+            alt='MasterCard'
+            className={selectedCard === 'mpesa' ? 'active-card' : ''}
+            onClick={() => setSelectedCard('mpesa')}
+          />
+
+        </div>
+
+        {selectedCard === 'visa' && (<Visa />)}
+
+        {selectedCard === 'mastercard' && (<MasterCard />)}
+
+        {selectedCard === 'paypal' && (<PayPal />) }
+
+        {selectedCard === 'mpesa' && (<MpesaForm />)} 
+
+      </div>
+    </div>
   )
 }
