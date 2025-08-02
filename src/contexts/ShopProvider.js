@@ -103,13 +103,17 @@ export default function ShopProvider({ children }) {
       // function to fetch a users cart
       const unsubscribe = onAuthStateChanged(auth, async (user) => {
 
-        // If the user is not logged in meaning that It is undefined
+        // If the user is not logged in, meaning that user is undefined
         if (!user) {
           // Clear the cart
           setCartProducts([])
 
-          return 
+          return
+
         } else {
+          // Fetch the logged in users cart from the database
+
+          
           // Create a reference to the exact location where the products have been stored
           const userCartCollectionRef = collection(db, "users", user.uid, "Cart")
 
@@ -199,7 +203,8 @@ export default function ShopProvider({ children }) {
           await addDoc(usersProductRef, {
             ...product, // spread all the products
             user: userId,
-            purchasedAt: serverTimestamp() // record the time of purchase
+            purchasedAt: serverTimestamp(), // record the time of purchase
+            selectedQuantity: product.selectedQuantity || 1
           })
 
         } catch (err) {

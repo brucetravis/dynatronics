@@ -3,12 +3,19 @@ import './ShoppingCart.css'
 import { motion } from 'framer-motion'
 import { Minus, Plus, TrashIcon, XCircle } from 'lucide-react'
 import { useShop } from '../../contexts/ShopProvider'
+import { toast } from 'react-toastify'
+import { auth, db } from '../configs/firebase/firebase'
+import { doc, setDoc } from 'firebase/firestore'
+import { useSearch } from '../../contexts/SearchProvider'
 
 export default function ShoppingCart() {
 
   // Get the cart function from the Auth state in order to enable the cart to be hidden 
   // when It is displayed
   const { setShowCart, cartProducts, removeCartProduct, checkOut, setCartProducts } = useShop()
+
+  // Get the loading state from the search Provider
+  const { loading } = useSearch()
 
   const [ _, setForceRender ] = useState(false);
 
@@ -24,7 +31,7 @@ export default function ShoppingCart() {
       // if the quantity of each product is falsy/undefined
       if (quantityRefs.current[product.id] === undefined) {
         // set the inital count to 1
-        quantityRefs.current[product.id] = 1
+        quantityRefs.current[product.id] = product.selectedQuantity || 1
       }
     })
   }, [cartProducts]) // watch out for a change in
@@ -47,7 +54,10 @@ export default function ShoppingCart() {
         <h2>Cart</h2>
         
         {/* render the cart products */}
-        {cartProducts.map((cartProduct) => (
+        {loading ? (
+          <div className='cart-loading'>Fetching Cart ..........</div>
+        ) : (
+        cartProducts.map((cartProduct) => (
           <div
             key={cartProduct.id} 
             className='cart-card'
@@ -91,7 +101,8 @@ export default function ShoppingCart() {
 
                     </button>
                     {/* <span className='text-info fs-5 fw-bold mb-3'>{cartProduct.quantity}</span> */}
-                    <span className='text-info fs-5 fw-bold mb-3'>{quantityRefs.current[cartProduct.id] || 1 }</span>
+                    {/* <span className='text-info fs-5 fw-bold mb-3'>{quantityRefs.current[cartProduct.id] || 1 }</span> */}
+                    <span className='text-info fs-5 fw-bold mb-3'>{quantityRefs.current[cartProduct.id] || cartProduct.selectedQuantity || 1 }</span>
                     <button 
                       // className='text-success fs-5'
                       style={{ color: "#00FFAB" }}
@@ -126,23 +137,51 @@ export default function ShoppingCart() {
             </div>
 
           </div>
-        ))}
+        ))
+        )}
 
 
 
         <button 
           className='checkout-button-cart mt-3'
           // onClick={() => checkOut(cartProducts)}
-          onClick={() => {
-            const productWithQuantities = cartProducts.map((product) => ({
+          onClick={async () => {
+            const productsWithQuantities = cartProducts.map((product) => ({
               // Copy all previous products
               ...product,
               selectedQuantity: quantityRefs.current[product.id] || 1
             }))
 
-            setCartProducts(productWithQuantities)
+            // save the selected Quantity for each user to firestore
+            const user = auth.currentUser
+            
+            // if the user is logged in
+            if (user) {
+              for (const product of productsWithQuantities) {
+                // create a reference to firestore
+                const ref = doc(db, "users", user.uid, "Cart", product.id)
 
-            checkOut(productWithQuantities)
+                try {
+                  await setDoc(ref, {
+                    ...product,
+                    selectedQuantity: product.selectedQuantity
+                  })
+                } catch (err) {
+                  console.error(`Error Updating product, ${product.id}`, err)
+                }
+              }
+            }
+
+            // Update local state
+            setCartProducts(productsWithQuantities)
+
+            // Proceed to checkout
+            checkOut(productsWithQuantities)
+
+            // setInterval(() => {
+            //   // toast.success("Proceeding to Payment......")
+            //   checkOut(productsWithQuantities)
+            // }, 100)
           }}
         >
           Proceed To checkOut

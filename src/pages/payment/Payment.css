@@ -282,6 +282,15 @@ input {
   background-color: #e0421f;
 }
 
+.payment-cart-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00FFAB;;
+  font-size: 18px;
+  padding: 150px;
+}
+
 
 @media screen and (max-width: 992px) {
   .payment-page {

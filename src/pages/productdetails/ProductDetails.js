@@ -132,7 +132,7 @@ export default function ProductDetails() {
                                 <p>Price: <span className='fs-5 me-1 text-warning'>Ksh {Number(productInfo.price).toLocaleString()}</span></p>
                             </div>
 
-                            <div className='detail-quantity'>
+                            <div className='detail-quantity d-flex align-items-center'>
                                 <span className='fs-5 me-1'>Quantity:</span>
                                 <input 
                                     type='text'
@@ -142,7 +142,7 @@ export default function ProductDetails() {
                                 
                             </div>
 
-                            <div className='buttonAndTrash details d-flex align-items-center justify-content-center mt-2 gap-2'>
+                            {/* <div className='buttonAndTrash details d-flex align-items-center justify-content-center mt-2 gap-2'>
                                 <button
                                     className='text-danger'
                                     onClick={() => {
@@ -183,9 +183,9 @@ export default function ProductDetails() {
                                         size={18}
                                     />
                                 </button>
-                            </div>
+                            </div> */}
 
-                            <div className='mb-4'>
+                            <div className='mb-4 mt-3'>
                                 <button
                                     onClick={() => fetchCartProduct(productInfo.id)}
                                     className='add-to-cart-button-details mt-3'

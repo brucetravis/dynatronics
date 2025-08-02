@@ -6,11 +6,15 @@ import MasterCard from './cardform/mastercard/MasterCard';
 import Visa from './cardform/visa/Visa';
 import { useShop } from '../../contexts/ShopProvider'
 import { useNavigate } from 'react-router-dom';
+import { useSearch } from '../../contexts/SearchProvider';
 
 export default function Payment() {
 
     // state for the default card to be selected
     const [ selectedCard, setSelectedCard ] = useState('visa') //default card
+
+    // Get the loading state from the Search Provider
+    const { loading } = useSearch()
 
     // DUMMY DATA
     // const cartItems = [
@@ -24,7 +28,7 @@ export default function Payment() {
     // Get the products from the cart so that we can display them in the payment page
     const { cartProducts } = useShop()
 
-    const subtotal = cartProducts.reduce((total, item) => total + item.price * item.quantity, 0);
+    const subtotal = cartProducts.reduce((total, item) => total + item.price * item.selectedQuantity || 1, 0);
 
     // useNavigate to navigate to another page
     const navigate = useNavigate()
@@ -42,16 +46,20 @@ export default function Payment() {
         <h2>Your Shopping Cart</h2>
 
         <div className='cart-items'>
-          {cartProducts.map(item => (
-            <div className='cart-item' key={item.id}>
-              <img src={item.imageUrl} alt={item.name} />
-              <div>
-                <p className='item-name'>{item.name}</p>
-                <p>Qty: {item.selectedQuantity}</p>
+          {loading ? (
+            <div className='payment-cart-loading'>Loading Cart to Pay.......</div>
+          ) : (
+            cartProducts.map(item => (
+              <div className='cart-item' key={item.id}>
+                <img src={item.imageUrl} alt={item.name} />
+                <div>
+                  <p className='item-name'>{item.name}</p>
+                  <p>Qty: {item.selectedQuantity || 1}</p>
+                </div>
+                <p className='item-price'>Ksh {Number(item.price * item.selectedQuantity || 1).toLocaleString()}</p>
               </div>
-              <p className='item-price'>Ksh {Number(item.price * item.quantity).toLocaleString()}</p>
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         <div className='subtotal'>
