@@ -25,7 +25,7 @@ export default function AuthProvider({ children }) {
             // Update the console with the users email
             console.log(u)
           } else {
-            // Update the state to null meaning
+            // Update the state to null meaning that no user has logged In
             setUser(null)
             console.log('No user logged in')
           }

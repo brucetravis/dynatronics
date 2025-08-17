@@ -205,9 +205,9 @@ export default function ProductDetails() {
                                 </button>
                                 <button 
                                     className='checkout-button'
-                                    onClick={checkOut}
+                                    // onClick={checkOut}
                                 >
-                                    Proceed to checkOut
+                                    Buy Now
                                 </button>
                                 <button className='pre-order-button'>Pre-Order</button>
                             </div>

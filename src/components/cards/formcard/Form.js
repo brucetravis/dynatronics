@@ -86,7 +86,7 @@ export default function Form() {
             // the errors state will be initially empty
         }
 
-        // set the loading to true after all theree validations. Incase of an error the remember that loading was still false
+        // set the loading to true after all three validations. Incase of an error the remember that loading was still false
         // set the loading to true since It will be true when the form is being submitted
         setLoading(true)
 
@@ -101,10 +101,10 @@ export default function Form() {
             // Update the displayName key in the user property
             await updateProfile(cred.user, { displayName: inputValue.name.trim() })
             
-            // Access the saved displayName value from firebase and atore It in the user object 
+            // Access the saved displayName value from firebase and store It in the user object 
             await cred.user.reload()  // reload does not reload the web page but accesses the user object values after a name has been saved to dsplayName           
             
-            // Update the user state with the extracted name sp that we can display the users name
+            // Update the user state with the extracted name so that we can display the users name
             setUser({ ...auth.currentUser })
             // create a usercollection in firestore and add a document of the users info
             await setDoc(doc(db, "users", cred.user.uid), {
@@ -120,6 +120,7 @@ export default function Form() {
             toast.success("Account Created Successfully, success")
             // navigateto the shop page
             navigate('/', { replace: true })
+            
             // Update the inputValue state to empty strings
             setInputValue({
                 name: "",
@@ -131,8 +132,10 @@ export default function Form() {
             // log the error messages to the console
             console.log(err.code, err.message)
             console.log(err.message)
-            // toast.error(`Error: ${err.message}`)
-            toast.error(`Error Creating Account, Email Already in use.`)
+
+            if (err.code === 'auth/email-already-in-use') {
+                toast.error("Ero=ro Creating Account. Email Already in Use")
+            }
             
         } finally {
             // Update the loading state to false so that the loading can be completed

@@ -71,7 +71,7 @@ export default function ProductsUpload() {
         if (imageUrl) {
             try {
                 // wait for Firestore to finish adding/saving the product before moving on
-                // addDoc geerates a new Id for every new product
+                // addDoc generates a new Id for every new product
                 await addDoc(collection(db, 'Products'),  {
                     // spread or copy all the form data
                     ...formData,

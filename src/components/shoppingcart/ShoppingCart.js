@@ -36,6 +36,9 @@ export default function ShoppingCart() {
     })
   }, [cartProducts]) // watch out for a change in
 
+
+  // if (cartProducts.length === 0) return <div className='cart-empty'>Your Cart is Empty</div>
+
   
   return (
     <motion.div
@@ -56,88 +59,90 @@ export default function ShoppingCart() {
         {/* render the cart products */}
         {loading ? (
           <div className='cart-loading'>Fetching Cart ..........</div>
+        ) : cartProducts.length === 0 ? (
+            <div className='cart-empty'>Your Cart Is Empty</div>
         ) : (
-        cartProducts.map((cartProduct) => (
-          <div
-            key={cartProduct.id} 
-            className='cart-card'
-          >
-            <div className='cart-content'>
-              <div className='cart-image-card'>
-                <img
-                  src={cartProduct.imageUrl}
-                  alt={cartProduct.name}
-                  className=''
-                />
-              </div>
-              
-              <div className='card-info'>
-                <h6 className='text-white fw-bold '>{cartProduct.name}</h6>
-                <span className='cart-desc fw-bold'>{cartProduct.description}</span>
-                
-                <p className='text-warning fw-bold fs-5 mt-2'>Ksh {Number(cartProduct.price).toLocaleString()}</p>
-                
-                <div className='buttonAndTrash d-flex align-items-center justify-content-between'>
-                  <div className='d-flex align-items-center gap-2'>
-                    <button 
-                      className='text-danger fs-6'
-                      onClick={() => {
-                        // Store the current initial quantity in a variable
-                        const currentQty = quantityRefs.current[cartProduct.id]
-
-                        // If the current initial quantity is greater than 1
-                        if (currentQty > 1) {
-                          quantityRefs.current[cartProduct.id] -= 1
-                          // Update the state to trigger a re-render
-                          setForceRender(prev => !prev)
-                        }
-                      }}
-
-                    >
-                      <Minus 
-                        size={18}
-                        style={{ color: "red" }}
-                      />
-
-                    </button>
-                    {/* <span className='text-info fs-5 fw-bold mb-3'>{cartProduct.quantity}</span> */}
-                    {/* <span className='text-info fs-5 fw-bold mb-3'>{quantityRefs.current[cartProduct.id] || 1 }</span> */}
-                    <span className='text-info fs-5 fw-bold mb-3'>{quantityRefs.current[cartProduct.id] || cartProduct.selectedQuantity || 1 }</span>
-                    <button 
-                      // className='text-success fs-5'
-                      style={{ color: "#00FFAB" }}
-                      onClick={() => {
-                        
-                        // Store the max quantity
-                        const maxQty = cartProduct.quantity
-                        // Store the initial count, which is 1
-                        const currentQty = quantityRefs.current[cartProduct.id]
-
-                        // If the count is less than the max quantity, increment
-                        if (currentQty < maxQty) {
-                          quantityRefs.current[cartProduct.id] += 1
-                          // Trigger a render
-                          setForceRender(prev => !prev)
-                        }
-                      }}
-
-                    >
-                      <Plus 
-                        size={18}
-                      />
-                    </button>
-                  </div>
-                  <TrashIcon 
-                    size={20} 
-                    className='remove-icon text-danger' 
-                    onClick={() => removeCartProduct(cartProduct.id)}
+          cartProducts.map((cartProduct) => (
+            <div
+              key={cartProduct.id} 
+              className='cart-card'
+            >
+              <div className='cart-content'>
+                <div className='cart-image-card'>
+                  <img
+                    src={cartProduct.imageUrl}
+                    alt={cartProduct.name}
+                    className=''
                   />
                 </div>
-              </div>
-            </div>
+                
+                <div className='card-info'>
+                  <h6 className='text-white fw-bold '>{cartProduct.name}</h6>
+                  <span className='cart-desc fw-bold'>{cartProduct.description}</span>
+                  
+                  <p className='text-warning fw-bold fs-5 mt-2'>Ksh {Number(cartProduct.price).toLocaleString()}</p>
+                  
+                  <div className='buttonAndTrash d-flex align-items-center justify-content-between'>
+                    <div className='d-flex align-items-center gap-2'>
+                      <button 
+                        className='text-danger fs-6'
+                        onClick={() => {
+                          // Store the current initial quantity in a variable
+                          const currentQty = quantityRefs.current[cartProduct.id]
 
-          </div>
-        ))
+                          // If the current initial quantity is greater than 1
+                          if (currentQty > 1) {
+                            quantityRefs.current[cartProduct.id] -= 1
+                            // Update the state to trigger a re-render
+                            setForceRender(prev => !prev)
+                          }
+                        }}
+
+                      >
+                        <Minus 
+                          size={18}
+                          style={{ color: "red" }}
+                        />
+
+                      </button>
+                      {/* <span className='text-info fs-5 fw-bold mb-3'>{cartProduct.quantity}</span> */}
+                      {/* <span className='text-info fs-5 fw-bold mb-3'>{quantityRefs.current[cartProduct.id] || 1 }</span> */}
+                      <span className='text-info fs-5 fw-bold mb-3'>{quantityRefs.current[cartProduct.id] || cartProduct.selectedQuantity || 1 }</span>
+                      <button 
+                        // className='text-success fs-5'
+                        style={{ color: "#00FFAB" }}
+                        onClick={() => {
+                          
+                          // Store the max quantity
+                          const maxQty = cartProduct.quantity
+                          // Store the initial count, which is 1
+                          const currentQty = quantityRefs.current[cartProduct.id]
+
+                          // If the count is less than the max quantity, increment
+                          if (currentQty < maxQty) {
+                            quantityRefs.current[cartProduct.id] += 1
+                            // Trigger a render
+                            setForceRender(prev => !prev)
+                          }
+                        }}
+
+                      >
+                        <Plus 
+                          size={18}
+                        />
+                      </button>
+                    </div>
+                    <TrashIcon 
+                      size={20} 
+                      className='remove-icon text-danger' 
+                      onClick={() => removeCartProduct(cartProduct.id)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          ))
         )}
 
 

@@ -7,7 +7,7 @@ const  categoryCardsData = [
     { id: 4, text: "SmartPhones", class: "category-card green-electric"},
     { id: 5, text: "Entertainment", class: "category-card blue-electric"},
     { id: 6, text: "Keyboards", class: "category-card neon-orange-electric"},
-    { id: 7, text: "headphones", class: "category-card cyan-electric"},
+    { id: 7, text: "headPhones", class: "category-card cyan-electric"},
     { id: 8, text: "Smart watch", class: "category-card pink-electric"},
     { id: 9, text: "VR-Glasses", class: "category-card yellow-electric"},
     { id: 10, text: "Airpods", class: "category-card orange-electric"}
