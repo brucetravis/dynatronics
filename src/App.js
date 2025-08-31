@@ -20,6 +20,7 @@ import { useSearch } from './contexts/SearchProvider';
 import Payment from './pages/payment/Payment';
 import About from './pages/about/About';
 import CategoryDetails from './pages/categorydetails/CategoryDetails';
+import NotFound from './pages/notfound/NotFound'
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
         <Route path={'/productsupload'} element={<ProductsUpload />} />
         <Route path='/productdetails/:id' element={<ProductDetails />} />
         <Route path='/categorydetails/:categoryName' element={<CategoryDetails />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <AnimatePresence>

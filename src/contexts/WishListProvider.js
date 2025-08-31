@@ -153,16 +153,39 @@ export default function WishProvider({ children }) {
     }
 
     // function to clear the wishList
-    const clearWish = () => {
+    const clearWish = async () => {
+        
+        // If the wishlist is empty
+        if (wishListProducts.length === 0) {
+            // Notify the user that wishlist is empty
+            toast.info("WishList Empty")
+        } else {
+            // Clear the WishList
+            setWishListProducts([])
+            
+            // Notify the user that the wishList has been cleared successfully
+            toast.success("WishList cleared Successfully")
+            
+            try {
 
-        // Clear the WishList
-        setWishListProducts([])
+                // Get the current user
+                const user = auth.currentUser
+                // create a reference to the wishlist collection in firebase
+                const userWishListRef = collection(db, "users", user.uid, "WishList")
+                // get the snapshot
+                const userWishCollectionSnap = await getDocs(userWishListRef)
 
-        // Remove the localStorage folder
-        // localStorage.setItem("WishListItems", JSON.stringify([]))
-    
-        // Notify the user that the wishList has been cleared successfully
-        toast.success("WishList cleared Successfully")
+                // Loop through each document deleting It
+                const deleteDocs = userWishCollectionSnap.docs.map(doc => deleteDoc(doc.ref))
+
+                // wait for the deletion to complete
+                await Promise.all(deleteDocs)
+
+            } catch (err) {
+                console.error(`Error referencing the users colection to clear WishList: ${err}`)
+            }
+        
+        }
     }
 
     return (

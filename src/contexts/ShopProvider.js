@@ -44,7 +44,7 @@ export default function ShopProvider({ children }) {
 
           // If the product already exists
           if (existingProduct) {
-            // Notigy the user that the product already exists
+            // Notify the user that the product already exists
             toast.warning("Product already exists in Cart")
             // return all previous products
             return prev // If we don't undefined will be returned and cause an error

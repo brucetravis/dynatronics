@@ -23,6 +23,16 @@
     font-weight: bold;
 }
 
+.wishlist-loading {
+    height: 100%;
+    color: #00FFAB;
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
 .close-wishlist {
     position: absolute;
     top: 20px;

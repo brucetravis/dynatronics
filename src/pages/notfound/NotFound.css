@@ -1,0 +1,57 @@
+.not-found-page {
+  background: linear-gradient(135deg, #1A1D29, #0F121A);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.not-found-content h1 {
+  font-size: 120px;
+  font-weight: 900;
+  color: #0DCAF0;
+  margin: 0;
+  text-shadow: 0 10px 40px rgba(13, 202, 240, 0.6);
+  animation: float 3s ease-in-out infinite;
+}
+
+.not-found-content h2 {
+  font-size: 32px;
+  color: #ffffff;
+  margin: 10px 0;
+}
+
+.not-found-content p {
+  font-size: 18px;
+  color: #cccccc;
+  margin: 15px 0 30px;
+  max-width: 500px;
+}
+
+.back-home {
+  display: inline-block;
+  background: #0DCAF0;
+  color: #1A1D29;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(13, 202, 240, 0.4);
+}
+
+.back-home:hover {
+  background: #13a6c4;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(13, 202, 240, 0.6);
+}
+
+/* Floating animation for the 404 */
+/* @keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+} */

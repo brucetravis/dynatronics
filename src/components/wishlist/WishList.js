@@ -3,6 +3,7 @@ import './WishList.css'
 import { motion } from 'framer-motion'
 import { Minus, Plus, Trash, XCircle } from 'lucide-react'
 import { useWish } from '../../contexts/WishListProvider'
+import { useSearch } from '../../contexts/SearchProvider'
 
 export default function WishList() {
 
@@ -12,6 +13,9 @@ export default function WishList() {
   
   // state to update the quantity
   const [ _, setForceRender ] = useState(false)
+
+  // Get the loading state form the Search Provider 
+  const { loading } = useSearch()
   
   // Create a reference object for each product
   const quantityRefs = useRef({}) // Initial ref is an object
@@ -47,7 +51,12 @@ export default function WishList() {
 
       <h2>WishList</h2>
 
-      {wishListProducts.map((wishProduct) => (
+      {loading ? (
+        <div className='wishlist-loading'>Fetching WishList ..........</div>
+      ) : wishListProducts.length === 0 ? (
+            <div className='cart-empty'>Your WishList Is Empty</div>
+        ) : (
+        wishListProducts.map((wishProduct) => (
         <div
           key={wishProduct.id} 
           className='wishlist-card'
@@ -115,9 +124,8 @@ export default function WishList() {
           </div>
           
         </div>
-      ))}
-
-
+      ))
+    )}
 
 
       <button

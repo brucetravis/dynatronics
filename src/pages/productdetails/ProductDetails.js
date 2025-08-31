@@ -5,16 +5,16 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../../components/configs/firebase/firebase'
 import { useShop } from '../../contexts/ShopProvider'
 import { useWish } from '../../contexts/WishListProvider'
-import { Minus, Plus } from 'lucide-react'
-import { toast } from 'react-toastify'
+// import { Minus, Plus } from 'lucide-react'
+// import { toast } from 'react-toastify'
 
 export default function ProductDetails() {
 
     // Get the function to add products to the Cart
     const { fetchCartProduct, checkOut } = useShop()
 
-    // satte to rerender when the quantity changes
-    const [ _, setForceRender ] = useState(false)
+    // state to rerender when the quantity changes
+    // const [ _, setForceRender ] = useState(false)
 
     // Create a reference for each product quantity
     const quantityRefs = useRef({})
