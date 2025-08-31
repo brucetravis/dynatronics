@@ -1,5 +1,5 @@
-import './App.css';
-import { Route, Routes } from 'react-router-dom'
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
 // import Shop from './pages/shop/Shop'
 import Shop from './pages/shop/Shop'
 import Home from './pages/home/Home'
@@ -23,16 +23,15 @@ import CategoryDetails from './pages/categorydetails/CategoryDetails';
 import NotFound from './pages/notfound/NotFound'
 
 function App() {
-
-  // Get the shopping cart state from the ShopProvider in order to display the shopping cart when 
+  // Get the shopping cart state from the ShopProvider in order to display the shopping cart when
   // the shoppping cart icon is clicked
-  const { showCart } = useShop()
+  const { showCart } = useShop();
 
   // Get the WishList state from the WishListProvider to display the WishList
-  const { showWish } = useWish()
+  const { showWish } = useWish();
 
   // Get the Search bar state for the SearchProvider to display the searchBar
-  const { showSearch } = useSearch()
+  const { showSearch } = useSearch();
 
   return (
     <div className="App">
@@ -49,25 +48,19 @@ function App() {
       </Routes>
 
       <AnimatePresence>
-        { showCart && (
-          <ShoppingCart key="shop" />
-        )}
+        {showCart && <ShoppingCart key="shop" />}
 
-        { showWish && (
-          <WishList key="wish" />
-        )}
+        {showWish && <WishList key="wish" />}
 
-        { showSearch && (
-          <SearchBar key="search" />
-        )}
-        
+        {showSearch && <SearchBar key="search" />}
+
         <CookieBanner key="cookie" />
       </AnimatePresence>
-      
+
       <BodyIcons />
       <ToastContainer position="bottom-left" autoClose={3000} />
     </div>
-  );
+);
 }
 
 export default App;
