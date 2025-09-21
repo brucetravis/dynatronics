@@ -78,23 +78,28 @@ export default function CategoryDetails() {
         <CategoryCards />
       </div>
 
-      {categoryProducts.map((categoryProduct) => (
-        <div className='category-product'>
-          <div className='category-product-image'>
-            <img 
-              src={categoryProduct.imageUrl}
-              alt={categoryProduct.name}
-              className=''
-              onClick={() => navigate(`/productdetails/${categoryProduct.id}`)}
-            />
+      <div
+        className='category-details-products'
+      >
+        {categoryProducts.map((categoryProduct) => (
+          <div className='category-product'>
+            <div className='category-product-image'>
+              <img 
+                src={categoryProduct.imageUrl}
+                alt={categoryProduct.name}
+                className=''
+                onClick={() => navigate(`/productdetails/${categoryProduct.id}`)}
+              />
+            </div>
+            
+            <div className='mt-3'>
+              <h5>{categoryProduct.name}</h5>
+              <p className='text-warning'>Ksh <span>{categoryProduct.price}</span></p>
+            </div>
           </div>
-          
-          <div className='mt-3'>
-            <h5>{categoryProduct.name}</h5>
-            <p className='text-warning'>Ksh <span>{categoryProduct.price}</span></p>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
+
     </div>
   )
 }
